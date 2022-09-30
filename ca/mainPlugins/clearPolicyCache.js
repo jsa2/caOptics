@@ -1,14 +1,9 @@
 const fs = require('fs')
 const path = require('path')
 
-function clearCache() {
+
+function clearPolicyCache() {
  
-    try {
-        fs.readdirSync('./tokenHandler/').filter(s => s.match(".json")).map(d => fs.unlinkSync(`./tokenHandler/${d}`))
-    } catch (error) {
-        console.log('no tokens to remove')
-    }
-    
     try {
         fs.unlinkSync(path.resolve(__dirname,'../../policies.json'))
     } catch (error) {
@@ -23,4 +18,15 @@ function clearCache() {
     return;
 }
 
-module.exports= {clearCache}
+function clearTokenCache() {
+ 
+    try {
+        fs.readdirSync('./tokenHandler/').filter(s => s.match(".json")).map(d => fs.unlinkSync(`./tokenHandler/${d}`))
+    } catch (error) {
+        console.log('no tokens to remove')
+    }
+
+    return;
+}
+
+module.exports= {clearPolicyCache,clearTokenCache}

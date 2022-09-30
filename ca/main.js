@@ -7,22 +7,39 @@ const chalk = require("chalk");
 const { userMap } = require("./mainPlugins/userMap");
 const { argv } = require("yargs");
 const { nonTerm } = require("./mainPlugins/uniqNonterm");
-const { clearCache } = require("./mainPlugins/clearToken");
+const { clearPolicyCache, clearTokenCache } = require("./mainPlugins/clearPolicyCache");
 const { getPermutations } = require("./mainPlugins/getPol2");
 const { rpCsv } = require("../createCSVreport");
+const { rpLegacy } = require("../createReportLegacy");
 
 
 main()
 
 async function main() {
 
-  if (argv.clearCache) {
+  if (argv.clearPolicyCache) {
     try {
-      clearCache()
+      clearPolicyCache()
     } catch (error) {
       var msg = `no tokens to clear, or no policies to clear --> continuing: ${error.message}`
       console.log(chalk.yellow(msg))
     }
+
+  }
+
+  if (argv.clearTokenCache) {
+    try {
+      clearTokenCache()
+    } catch (error) {
+      var msg = `no tokens to clear, or no policies to clear --> continuing: ${error.message}`
+      console.log(chalk.yellow(msg))
+    }
+
+  }
+
+
+
+  if (argv.clearTokenCache) {
 
   }
 
@@ -128,16 +145,27 @@ If all platforms should be alt param
 
   console.log('inspecting cross-policy mutations')
   // const mesh = permutationList(uniq)
-  const mest2 = await getPermutations(uniq)
-  //console.log(mest2)
+  let mesh 
+  
+  if (argv.aggressive) {
+    // keep aggressive available for historical purposes
+    mesh = permutationList(uniq)
+  } else {
+    // non aggressive permutation generation by default
+    mesh= await getPermutations(uniq)
+    //console.log(mesh)
+  }
+ 
+
+  
 
   const mockForMesh = {
     policy: { displayName: "All (cross-policy)" },
-    toProcessingPipeline: mest2
+    toProcessingPipeline: mesh
   }
 
   if (argv.dump) {
-    fs.writeFileSync('mesh.json', JSON.stringify(mest2))
+    fs.writeFileSync('mesh.json', JSON.stringify(mesh))
   }
 
   console.log('unique items', uniq.length)
@@ -146,7 +174,7 @@ If all platforms should be alt param
 
   const mix = await nTerminatedPolicyConditionsLookupFull([mockForMesh], policies)
 
-  /*  let nq = nonTerm(mix) */
+  
 
   if (argv.dump) {
     fs.writeFileSync('results.json', JSON.stringify(mix))
@@ -154,9 +182,20 @@ If all platforms should be alt param
 
   console.log('unique same key order permutations across policies', mix?.length || 0)
 
-  rp(mix, true)
+  if (argv.aggressive) {
 
-  rpCsv(mix,true)
+  let nq = nonTerm(mix) 
+
+  rpLegacy(nq, true,true)
+
+  } else {
+
+    rp(mix, true)
+
+    rpCsv(mix,true)
+
+  }
+
 
 
   console.log(chalk.green('review crosstable.md for results'))
