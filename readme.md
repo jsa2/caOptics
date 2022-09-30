@@ -150,6 +150,17 @@ To reduce amount of code, we use the following depedencies for operation and aes
   [chalk](https://www.npmjs.com/package/chalk)| ✅ | |[MIT](https://github.com/chalk/chalk/blob/main/license)
    [js-beautify ](https://www.npmjs.com/package/js-beautify) | ✅ | |[MIT](https://github.com/beautify-web/js-beautify/blob/main/LICENSE)
 
+> What network access is needed for this to work? for those interested, where does this tool makes it's calls after login
+  > Besides needing to access github.com and npm to download depedencies access to following hostnames should be available when running the tool
+
+  ```
+  graph.microsoft.com
+  login.microsoftonline.com
+  ```
+
+  Below is typical trace I do when I am running any 3rd party packages on my Node.js apps. It shows the URL's that are being called in runtime 
+
+  ![](20220930153822.png)  
 
  ---
 
