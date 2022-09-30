@@ -23,7 +23,7 @@
 ---
 Release notes: 0.6.1 beta 
 - Basic version of CSV reporting added
-- Streamlined permutation generation to ensure essential permutations are catched, and some permutations are are terminated earlier on the lookups
+- Streamlined permutation generation to ensure essential permutations are generated, and some permutations are are terminated earlier on the lookups
 
 Release notes: 0.6 beta (first non "silent" release)
 - App displayNames added to MD report. Object type added to the user type
@@ -44,8 +44,9 @@ This is a beta release, meaning that its only released to gather feedback from p
 
 For next release:
 
--  Map appId's to application displayName in report (currently only AppID's are shown)
+- ~~Map appId's to application displayName in report (currently only AppID's are shown)~~ see (0.6)
 -  Allow caching of userMap() - This is good option if you test non user/group/role changes to your policies, and want to retain previous userMap
+-  Implement userMapping for guests (guests are handled, but objectId's are not checked for guest condition)
 
 ---
 
@@ -162,7 +163,7 @@ To reduce amount of code, we use the following depedencies for operation and aes
 4. Legacy auth is not evaluated when the evaluated policy includes **only** legacy auth conditions - **Backround**: Microsoft is in the process of deprecating basic auth for Exchange, so large part of the legacy auth evaluation will soon (end of 2022) become irrelevant. 
    >You can still opt for ``--includeLegacyAuth`` parameter to include only legay auth policies in the mix. Bare in mind, that this will assume, then that Legacy Auth is covered for all apps (thus evaluate it also for apps not supporting legacy auth), not only EXO
 5. Tooling stores AZ CLI refresh token locally to retain session persistence - Tokens are cached locally in plaintext (just like they are cached with Azure CLI, regardless you use this tool or not). While token cache can be encrypted, it does not offer any benefits for the PoC for this time. Encrypting the token cache would not help that much either, as possibly many other tools/apps running in the system store opaque refresh tokens in their plaintext format. 
-6. Regarding the reporting and permutations: I am still working figuring out the best balance between readability and verbosity 
+6. Regarding the reporting and permutations: I am still working figuring out the best balance between readability and verbosity. I do believe that all gaps in scope are catched, but I've done numerous changes to algorithm of such detections, and thus there could still be some edge conditions I have not considered. 
 
  
 ---
