@@ -1,0 +1,34 @@
+node_modules
+md/conversions/**
+test.js
+test2.js
+removeP.js
+rollback.js
+#Exclude all log files
+*.LOG
+*.txt
+*.json
+*.JSON
+*.pdf
+*.csv
+# exclude from JSON and MD flag
+!_launch.json
+!package.json
+!/providers/**
+!/demodata/**
+!/docs/**
+*.md
+!east.md
+!gitCheat.md
+!demo.md
+!readme.md
+!logic.md
+!dev-guide.md
+!example.md
+# Exlcude all docx files
+*.docx
+!pandoc-template-horizontal.docx
+!pandoc-template.docx
+!prepend.docx
+
+
