@@ -439,7 +439,7 @@ All                   All          browser                     macOS     finland
 - If you are using AZ CLI for session login, start with ``az account clear`` 
 - Upon running the tool add the ``--clearPolicyCache --clearTokencache`` to clear caches (tokens, policies and locations)
 - remove existing policies.json and namedLocations.json from project root manually (if you are not using the ``--clearPolicyCache --clearTokencache``  option )
-- If Group includes don't seem to work ensure ``--mapping`` is selected, and you don't have nesting beyond two groups
+- If Group includes don't seem to work, ensure ``--mapping`` is selected, and you don't have nesting beyond two groups
 
 --- 
 
