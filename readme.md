@@ -1,7 +1,8 @@
 
-- [Release notes](#release-notes)
-- [CA Optics - Azure AD Conditional Access gap analyzer](#ca-optics---azure-ad-conditional-access-gap-analyzer)
+- [CA Optics - Azure AD Conditional Access Gap Analyzer](#ca-optics---azure-ad-conditional-access-gap-analyzer)
   - [What is Conditional Access?](#what-is-conditional-access)
+  - [Notes for early testers](#notes-for-early-testers)
+- [Release notes](#release-notes)
   - [Example of a gap](#example-of-a-gap)
   - [Permutation generation](#permutation-generation)
   - [Prerequisites](#prerequisites)
@@ -22,7 +23,19 @@
 
 ---
 
-**Notes for early testers**
+
+# CA Optics - Azure AD Conditional Access Gap Analyzer
+
+Azure AD Conditional Access gap analyzer is a solution for scanning gaps that might exist within complex Azure Active Directory Conditional Access Policy setups.
+
+
+## What is Conditional Access?
+
+If you are new to Conditional Access we recommend that you review the following Microsoft article: https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/overview
+
+---
+
+## Notes for early testers
 
 After completing the pre-requisites and reading this readme file, consider following:
 
@@ -35,16 +48,16 @@ After completing the pre-requisites and reading this readme file, consider follo
  Read: [``scope``](#scope)
 
 4. Start with test environment so you get some experience and can set expectations about the tool mechanics
-5. if you have known group or users that are excluded from policies define ``--skipObjectIds`` them to be excluded from the scan unless you are looking to confirm the exclusions
-6. If you are running scans in multiple environments ensure logins and caches are removed before running new scans
+5. if you have known group or users that are excluded from policies define with ``--skipObjectIds`` objects to be excluded from the scan unless you are looking to confirm the exclusions
+6. If you are running scans in multiple environments ensure: logins and caches are removed before running new scans
    Read:[parameters](#parameters)
+    - if you have AZ CLI installed, remove AZ CLI cache before proceeding ``az account clear`` and new perform new login to the environment you are planning to scan with ``az login`` 
 
-(if you have AZ CLI installed, remove AZ CLI cache before proceeding ``az account clear``)
+Read [other important notes](#important)
 
 ---
 
 # Release notes
-
 
     Release notes: 0.6.2 beta
     - Separated cache params into one -> (clearTokenCache and ClearPolicyCache)
@@ -60,19 +73,9 @@ After completing the pre-requisites and reading this readme file, consider follo
 
     Release notes: 0.5.2,0.5.1,0.5 beta  (see previous branches for release notes)
     
-
 ---
 
 
-
-# CA Optics - Azure AD Conditional Access gap analyzer
-
-Azure AD Conditional Access gap analyzer is a solution for scanning gaps that might exist within complex Azure Active Directory Conditional Access Policy setups.
-
-
-## What is Conditional Access?
-
-If you are new to Conditional Access we recommend that you review the following Microsoft article: https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/overview
 
 ---
 ## Example of a gap
