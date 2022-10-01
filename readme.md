@@ -42,7 +42,7 @@ After completing the pre-requisites and reading this readme file, consider follo
 1. reportOnly policies are not considered terminating 
  Read: [``scope``](#scope)
 
-2. run each scan with [``--ClearPolicyCache``](#parameters)
+2. run each scan with [``--clearPolicyCache``](#parameters)
 
 3. only policies targeting users and apps are in scope (this is the most common scope, but means for example, that security registration policy is not evaluated)
  Read: [``scope``](#scope)
