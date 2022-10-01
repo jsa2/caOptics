@@ -22,6 +22,7 @@
 
 ---
 
+<<<<<<< HEAD
 
     Release notes: 0.6.2 beta
     - Separated cache params into one -> (clearTokenCache and ClearPolicyCache)
@@ -36,6 +37,32 @@
 
     Release notes: 0.5.2,0.5.1,0.5 beta  (see previous branches for release notes)
     
+=======
+    Release notes: 0.6.1 beta 
+    - Basic version of CSV reporting added
+    - Streamlined permutation generation to ensure essential permutations are generated, and some permutations are are terminated earlier on the lookups
+
+    Release notes: 0.6 beta (first non "silent" release)
+    - App displayNames added to MD report. Object type added to the user type
+
+    Release notes: 0.5.2 beta
+    - Major change to permutation algorithm. While the logic alogrithm was ok, the amount of permutations would generate high memory consumption. This release introduces new algorithm, and removes some previous functions that retroactively reduced the amount of permutations. Basic checks have been done to ensure that results from checks remain the same. 
+
+    Release notes: 0.5.1 beta
+    - Fixed a logic condition group processing (with more than one group for exclusions/inclusion advanced group lookup would have logic error where it would only pick the first of the groups for eval)
+
+    Release notes: 0.5 beta
+    This is a beta release, meaning that its only released to gather feedback from piloting. 
+    - This release is mostly meant for testing on 1:1 sessions with guidance. If you happen to stumble upon this release you are free to take it for a ride :) 
+    - Most of the internals (logic, permutation generation) etc. are only available in debugger and not explained in depth here
+    - Some areas in code include debugging code & comments. These will see streamlining once we are closer to 1.0
+    - Carefully read [readme](readme.md) before proceeding
+
+    For next release:
+    - Map appId's to application displayName in report (currently only AppID's are shown) see (0.6)
+    - Allow caching of userMap() - This is good option if you test non user/group/role changes to your policies, and want to retain previous userMap
+    -  Implement userMapping for guests (guests are handled, but objectId's are not checked for guest condition)
+>>>>>>> c6517abfa2ea40756ea4f856db621dc0e564163a
 
 ---
 
@@ -140,19 +167,30 @@ To reduce amount of code, we use the following depedencies for operation and aes
   [chalk](https://www.npmjs.com/package/chalk)| ✅ | |[MIT](https://github.com/chalk/chalk/blob/main/license)
    [js-beautify ](https://www.npmjs.com/package/js-beautify) | ✅ | |[MIT](https://github.com/beautify-web/js-beautify/blob/main/LICENSE)
 
+<<<<<<< HEAD
 **What network access is needed for this to work?**
 
 1. Following hosts are needed for operation
 
   ```sh
+=======
+> What network access is needed for this to work? for those interested, where does this tool makes it's calls after login
+  > Besides needing to access github.com and npm to download depedencies access to following hostnames should be available when running the tool
+
+  ```
+>>>>>>> c6517abfa2ea40756ea4f856db621dc0e564163a
   graph.microsoft.com
   login.microsoftonline.com
   ```
 
+<<<<<<< HEAD
 2. Before operation access to github and npmjs is needed to download depedencies. 
    > If you plan to run this tool in network restricted environment, then download the depedencies first in an environment that allows access to package installations and github.com. You may then transfer the whole installation directory zipped to the network restricted environment
 
  > Below is typical trace I do when I am running any 3rd party packages on my Node.js apps. It shows the URL's that are being called in runtime 
+=======
+  Below is typical trace I do when I am running any 3rd party packages on my Node.js apps. It shows the URL's that are being called in runtime 
+>>>>>>> c6517abfa2ea40756ea4f856db621dc0e564163a
 
   ![](20220930153822.png)  
 
