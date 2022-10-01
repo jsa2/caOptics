@@ -20,6 +20,26 @@
 - [Contributing](#contributing)
 
 
+**Notes for early testers**
+
+After completing the pre-requisites and reading this readme file, consider following:
+
+>1. reportOnly policies are not considered terminating 
+>> Read: [``scope``](#scope)
+
+>2. run each scan with [``--ClearPolicyCache``](#parameters)
+
+>3. only policies targeting users and apps are in scope (this is the most common scope, but means for example, that security registration policy is not evaluated)
+>> Read: [``scope``](#scope)
+
+>4. Start with test environment so you get some experience and can set expectations about the tool mechanics
+>5. if you have known group or users that are excluded from policies define ``--skipObjectIds`` them to be excluded from the scan unless you are looking to confirm the exclusions
+>6. If you are running scans in multiple environments ensure logins and caches are removed before running new scans
+  >> Read:[parameters](#parameters)
+
+>>(if you have AZ CLI installed, remove AZ CLI cache before proceeding ``az account clear``)
+
+
 ---
 
 
