@@ -25,7 +25,7 @@
 
     Release notes: 0.6.2 beta
     - Separated cache params into one -> (clearTokenCache and ClearPolicyCache)
-    - Added possibility of running pre-optimized algorithm on permutations with param --aggressive 
+    - Added possibility of running pre-optimized algorithm on permutations with param --aggressive (High memory consumption, only here for A/B testing)
   
     Release notes: 0.6.1 beta 
     - Basic version of CSV reporting added
