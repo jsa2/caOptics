@@ -4,6 +4,13 @@
   - [Example of a gap](#example-of-a-gap)
   - [Permutation generation](#permutation-generation)
   - [Prerequisites](#prerequisites)
+  - [Important](#important)
+  - [Description - Conditional Access Gap analyzer](#description---conditional-access-gap-analyzer)
+    - [Compared to existing tooling](#compared-to-existing-tooling)
+  - [Scope](#scope)
+  - [Opinionated design](#opinionated-design)
+    - [Design decisions](#design-decisions)
+      - [Platform lookup](#platform-lookup)
       - [Lookup differences](#lookup-differences)
       - [Group nesting](#group-nesting)
   - [Parameters](#parameters)
@@ -19,7 +26,7 @@
     Release notes: 0.6.2 beta
     - Separated cache params into one -> (clearTokenCache and ClearPolicyCache)
     - Added possibility of running pre-optimized algorithm on permutations with param --aggressive (High memory consumption, only here for A/B testing)
-    - merge completed
+    - merge completed.
   
     Release notes: 0.6.1 beta 
     - Basic version of CSV reporting added
@@ -134,30 +141,19 @@ To reduce amount of code, we use the following depedencies for operation and aes
   [chalk](https://www.npmjs.com/package/chalk)| ✅ | |[MIT](https://github.com/chalk/chalk/blob/main/license)
    [js-beautify ](https://www.npmjs.com/package/js-beautify) | ✅ | |[MIT](https://github.com/beautify-web/js-beautify/blob/main/LICENSE)
 
-<<<<<<< HEAD
 **What network access is needed for this to work?**
 
 1. Following hosts are needed for operation
 
   ```sh
-=======
-> What network access is needed for this to work? for those interested, where does this tool makes it's calls after login
-  > Besides needing to access github.com and npm to download depedencies access to following hostnames should be available when running the tool
-
-  ```
->>>>>>> c6517abfa2ea40756ea4f856db621dc0e564163a
   graph.microsoft.com
   login.microsoftonline.com
   ```
 
-<<<<<<< HEAD
 2. Before operation access to github and npmjs is needed to download depedencies. 
    > If you plan to run this tool in network restricted environment, then download the depedencies first in an environment that allows access to package installations and github.com. You may then transfer the whole installation directory zipped to the network restricted environment
 
  > Below is typical trace I do when I am running any 3rd party packages on my Node.js apps. It shows the URL's that are being called in runtime 
-=======
-  Below is typical trace I do when I am running any 3rd party packages on my Node.js apps. It shows the URL's that are being called in runtime 
->>>>>>> c6517abfa2ea40756ea4f856db621dc0e564163a
 
   ![](20220930153822.png)  
 
