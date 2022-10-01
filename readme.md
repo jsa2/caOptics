@@ -3,6 +3,7 @@
   - [What is Conditional Access?](#what-is-conditional-access)
   - [Notes for early testers](#notes-for-early-testers)
 - [Release notes](#release-notes)
+- [Documentation](#documentation)
   - [Example of a gap](#example-of-a-gap)
   - [Permutation generation](#permutation-generation)
   - [Prerequisites](#prerequisites)
@@ -78,6 +79,7 @@ Read [other important notes](#important)
 
 
 ---
+# Documentation 
 ## Example of a gap
 
 ![](img/20220913111008.png)  
