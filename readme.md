@@ -39,7 +39,7 @@ If you are new to Conditional Access we recommend that you review the following 
 
 After completing the pre-requisites and reading this readme file, consider following:
 
-1. reportOnly policies are not considered terminating 
+1. reportOnly policies are not considered terminating:
  Read: [``scope``](#scope)
 
 2. run each scan with [``--clearPolicyCache``](#parameters)
