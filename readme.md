@@ -22,7 +22,7 @@
 
 ---
 
-    Release notes: 0.6.1 beta 
+    Release notes: 0.6.1 beta (checkpoint branch created)
     - Basic version of CSV reporting added
     - Streamlined permutation generation to ensure essential permutations are generated, and some permutations are are terminated earlier on the lookups
 
