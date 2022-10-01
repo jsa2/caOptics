@@ -22,6 +22,22 @@
 
 ---
 
+<<<<<<< HEAD
+
+    Release notes: 0.6.2 beta
+    - Separated cache params into one -> (clearTokenCache and ClearPolicyCache)
+    - Added possibility of running pre-optimized algorithm on permutations with param --aggressive (High memory consumption, only here for A/B testing)
+  
+    Release notes: 0.6.1 beta 
+    - Basic version of CSV reporting added
+    - Streamlined permutation generation to ensure essential permutations are generated, and some permutations are are terminated earlier on the lookups
+
+    Release notes: 0.6 beta (first non "silent" release)
+    - App displayNames added to MD report. Object type added to the user type
+
+    Release notes: 0.5.2,0.5.1,0.5 beta  (see previous branches for release notes)
+    
+=======
     Release notes: 0.6.1 beta 
     - Basic version of CSV reporting added
     - Streamlined permutation generation to ensure essential permutations are generated, and some permutations are are terminated earlier on the lookups
@@ -46,6 +62,7 @@
     - Map appId's to application displayName in report (currently only AppID's are shown) see (0.6)
     - Allow caching of userMap() - This is good option if you test non user/group/role changes to your policies, and want to retain previous userMap
     -  Implement userMapping for guests (guests are handled, but objectId's are not checked for guest condition)
+>>>>>>> c6517abfa2ea40756ea4f856db621dc0e564163a
 
 ---
 
@@ -150,15 +167,30 @@ To reduce amount of code, we use the following depedencies for operation and aes
   [chalk](https://www.npmjs.com/package/chalk)| ✅ | |[MIT](https://github.com/chalk/chalk/blob/main/license)
    [js-beautify ](https://www.npmjs.com/package/js-beautify) | ✅ | |[MIT](https://github.com/beautify-web/js-beautify/blob/main/LICENSE)
 
+<<<<<<< HEAD
+**What network access is needed for this to work?**
+
+1. Following hosts are needed for operation
+
+  ```sh
+=======
 > What network access is needed for this to work? for those interested, where does this tool makes it's calls after login
   > Besides needing to access github.com and npm to download depedencies access to following hostnames should be available when running the tool
 
   ```
+>>>>>>> c6517abfa2ea40756ea4f856db621dc0e564163a
   graph.microsoft.com
   login.microsoftonline.com
   ```
 
+<<<<<<< HEAD
+2. Before operation access to github and npmjs is needed to download depedencies. 
+   > If you plan to run this tool in network restricted environment, then download the depedencies first in an environment that allows access to package installations and github.com. You may then transfer the whole installation directory zipped to the network restricted environment
+
+ > Below is typical trace I do when I am running any 3rd party packages on my Node.js apps. It shows the URL's that are being called in runtime 
+=======
   Below is typical trace I do when I am running any 3rd party packages on my Node.js apps. It shows the URL's that are being called in runtime 
+>>>>>>> c6517abfa2ea40756ea4f856db621dc0e564163a
 
   ![](20220930153822.png)  
 
@@ -222,7 +254,7 @@ At version 0.5 the conditions that are covered are as follows:
   - >(Anything that is not on the list, is not evaluated. eg. risk based policies are not considered covering gaps, as the risk detection is not considered perfect, and should be used rather in situations you want to block something vs. require MFA only when there is risk associated)
 
 
->¹ Given that Microsoft is depraceting Legacy Auth, legacy auth is not reviewed
+>¹ Given that Microsoft is deprecating Legacy Auth, legacy auth is not reviewed
 >² Policy enforcement needs to be enabled (report only policies are not evaluated by default, but can included with certain flag)
 
 
@@ -338,9 +370,10 @@ Param| Description
 ``mapping`` | By default user and group based exclusions are evaluated by objects exact ID. For example if object is excluded by one policy, the object should be found in another policy by it's exact id. <br> Using `` --mapping`` invokes MS Graph to populate relationship between objects in a way that ensures, that for example user can be excluded by userId in one policy, while the evaluation detects that user is included in another policy by a groupId. <br> e.g. ``--mapping`` 
 ``skipObjectId `` | Removes ObjectId from permutations. This migth be useful, if you want to exclude break-glass account from results <br> e.g. ``--skipObjectId=bcd27e9b-8974-42ec-a2a1-ba2498b45674,c7a4a639-00e7-47e0-aa9d-ea502bbbd382`` 
 ``skip `` | Removes full permutation category. <br> e.g. ``--skip=users`` 
-``includeReportOnly `` | Allows mixing reportOnly policies with enabled policies. Remove existing policies before running this by removing the policies.json file in the root, or use ``clearCache`` option <br> e.g. ``--includeReportOnly`` 
+``includeReportOnly `` | Allows mixing reportOnly policies with enabled policies. Remove existing policies before running this by removing the policies.json file in the root, or use ``clearPolicyCache`` option <br> e.g. ``--includeReportOnly`` 
 ``includeLegacyAuth `` | By default policies that have just legacy auth conditions are not evaluated. Use this flag if you want to include legacy auth into the analysis <br> please note that including legacy auth will review it against all apps, not only supported workloads (AAD,SPO,EXO) <br> e.g. ``--includeLegacyAuth`` 
-``clearCache `` | Removes token and policy caches <br> e.g. ``--clearCache`` 
+``clearPolicyCache `` | Removes policy caches <br> e.g. ``--clearPolicyCache`` 
+``clearTokenCache `` | Removes token caches <br> e.g. ``--clearTokenCache`` 
 ``allTerminations`` | Includes also results that terminated to policy <br> ``--allTerminations``
 ``debug`` | Shows memory use and estimation of progress <br> eg. ``--debug``
 
@@ -364,7 +397,7 @@ Each run will initiate login if no session is stored. If you have session on Azu
 3. Supplying ``skipObjectId=yourID`` to exclude Break glass group 
 >``node ./ca/main.js --mapping  --skipObjectId=259fcf40-ff7c-4625-9b78-cd11793f161f`` 
 
-Also, if you are experimenting with the tool, it is recommended to include ``--clearCache`` param. This will remove existing session tokens, and the policy.json (cache)
+Also, if you are experimenting with the tool, it is recommended to include ``--clearPolicyCache --clearTokencache``  param. This will remove existing session tokens, and the policy.json (cache)
 
 >remove policies.json from the project folder, if you don't want to remove session from cache, but just want to have policies to be removed
 
@@ -415,8 +448,8 @@ All                   All          browser                     macOS     finland
 ## Troubleshooting
 
 - If you are using AZ CLI for session login, start with ``az account clear`` 
-- Upon running the tool add the ``--clearCache`` to clear caches (tokens, policies and locations)
-- remove existing policies.json and namedLocations.json from project root manually (if you are not using the ``--clearCache`` option )
+- Upon running the tool add the ``--clearPolicyCache --clearTokencache`` to clear caches (tokens, policies and locations)
+- remove existing policies.json and namedLocations.json from project root manually (if you are not using the ``--clearPolicyCache --clearTokencache``  option )
 - If Group includes don't seem to work ensure ``--mapping`` is selected, and you don't have nesting beyond two groups
 
 --- 
@@ -428,7 +461,7 @@ If you are testing this solution in larger environment. Enable ``--debug`` in pa
 
 > Since the current algorithm for permutation generation is much reduced from original one, even Cloud Shell should work, but for example race condition, or other memory leak might still loom somewhere, and manifest in larger environments, mitigating the benefits of the current algorithm. 
 
-``node --max-old-space-size=4096 ./ca/main.js --mapping  --skipObjectId=259fcf40-ff7c-4625-9b78-cd11793f161f --clearCache --debug`` 
+``node --max-old-space-size=4096 ./ca/main.js --mapping  --skipObjectId=259fcf40-ff7c-4625-9b78-cd11793f161f --clearPolicyCache --debug`` 
 
 
 ---

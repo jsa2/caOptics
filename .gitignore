@@ -25,6 +25,7 @@ rollback.js
 !logic.md
 !dev-guide.md
 !example.md
+!run.md
 # Exlcude all docx files
 *.docx
 !pandoc-template-horizontal.docx
