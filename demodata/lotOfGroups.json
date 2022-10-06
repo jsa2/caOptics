@@ -1,0 +1,101 @@
+[
+    {
+        "id": "4c096b25-2cbb-4a2a-a2e9-2cef12674adc",
+        "displayName": "adminGrant",
+        "createdDateTime": "2022-09-12T06:33:26.4671228Z",
+        "modifiedDateTime": "2022-09-12T07:01:46.249428Z",
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+            "userRiskLevels": [],
+            "signInRiskLevels": [],
+            "clientAppTypes": [
+                "all"
+            ],
+            "servicePrincipalRiskLevels": [],
+            "platforms": null,
+            "locations": null,
+            "devices": null,
+            "clientApplications": null,
+            "applications": {
+                "includeApplications": [
+                    "All"
+                ],
+                "excludeApplications": [],
+                "includeUserActions": [],
+                "includeAuthenticationContextClassReferences": []
+            },
+            "users": {
+                "includeUsers": [],
+                "excludeUsers": [],
+                "includeGroups": [],
+                "excludeGroups": [],
+                "includeRoles": [
+                    "9b895d92-2cd3-44c7-9d02-a6ac2d5ea5c3"
+                ],
+                "excludeRoles": []
+            }
+        },
+        "grantControls": {
+            "operator": "OR",
+            "builtInControls": [
+                "mfa"
+            ],
+            "customAuthenticationFactors": [],
+            "termsOfUse": []
+        }
+    },
+    {
+        "id": "f4898dba-ffd0-480d-862d-79ac3ccc05e2",
+        "displayName": "baseline",
+        "createdDateTime": "2022-09-12T06:58:25.6356601Z",
+        "modifiedDateTime": "2022-09-12T10:56:48.5611298Z",
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+            "userRiskLevels": [],
+            "signInRiskLevels": [],
+            "clientAppTypes": [
+                "all"
+            ],
+            "servicePrincipalRiskLevels": [],
+            "platforms": null,
+            "locations": null,
+            "devices": null,
+            "clientApplications": null,
+            "applications": {
+                "includeApplications": [
+                    "All"
+                ],
+                "excludeApplications": [],
+                "includeUserActions": [],
+                "includeAuthenticationContextClassReferences": []
+            },
+            "users": {
+                "includeUsers": [
+                    "All"
+                ],
+                "excludeUsers": [
+                    "259fcf40-ff7c-4625-9b78-cd11793f161f"
+                ],
+                "includeGroups": [],
+                "excludeGroups": [
+                    "6e41b62d-752b-42c6-9f34-d6ac90eddca3",
+                    "a7a34ae9-b8ce-4c9e-af7b-d32790734b18"
+                ],
+                "includeRoles": [],
+                "excludeRoles": [
+                    "9b895d92-2cd3-44c7-9d02-a6ac2d5ea5c3"
+                ]
+            }
+        },
+        "grantControls": {
+            "operator": "OR",
+            "builtInControls": [
+                "mfa"
+            ],
+            "customAuthenticationFactors": [],
+            "termsOfUse": []
+        }
+    }
+]

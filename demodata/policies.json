@@ -1,0 +1,124 @@
+    [{
+    "id": "a0ff5ad3-8e79-442d-a999-7c20d0e38ddd",
+    "displayName": "Handle macOs",
+    "createdDateTime": "2022-09-16T06:21:16.6103941Z",
+    "modifiedDateTime": "2022-09-16T06:49:46.0163051Z",
+    "state": "enabled",
+    "sessionControls": null,
+    "conditions": {
+        "userRiskLevels": [],
+        "signInRiskLevels": [],
+        "clientAppTypes": ["mobileAppsAndDesktopClients"],
+        "servicePrincipalRiskLevels": [],
+        "locations": null,
+        "devices": null,
+        "clientApplications": null,
+        "applications": {
+            "includeApplications": ["All"],
+            "excludeApplications": [],
+            "includeUserActions": [],
+            "includeAuthenticationContextClassReferences": []
+        },
+        "users": {
+            "includeUsers": ["All"],
+            "excludeUsers": ["259fcf40-ff7c-4625-9b78-cd11793f161f"],
+            "includeGroups": [],
+            "excludeGroups": [],
+            "includeRoles": [],
+            "excludeRoles": []
+        },
+        "platforms": {
+            "includePlatforms": ["macOS"],
+            "excludePlatforms": []
+        }
+    },
+    "grantControls": {
+        "operator": "OR",
+        "builtInControls": ["mfa"],
+        "customAuthenticationFactors": [],
+        "termsOfUse": []
+    }
+}, {
+    "id": "f804a06c-fb50-4aa0-a93b-f1371072d2b9",
+    "displayName": "baseline",
+    "createdDateTime": "2022-09-16T06:21:13.8045798Z",
+    "modifiedDateTime": null,
+    "state": "enabled",
+    "sessionControls": null,
+    "conditions": {
+        "userRiskLevels": [],
+        "signInRiskLevels": [],
+        "clientAppTypes": ["all"],
+        "servicePrincipalRiskLevels": [],
+        "platforms": null,
+        "devices": null,
+        "clientApplications": null,
+        "applications": {
+            "includeApplications": ["All"],
+            "excludeApplications": [],
+            "includeUserActions": [],
+            "includeAuthenticationContextClassReferences": []
+        },
+        "users": {
+            "includeUsers": ["All"],
+            "excludeUsers": ["259fcf40-ff7c-4625-9b78-cd11793f161f"],
+            "includeGroups": [],
+            "excludeGroups": [],
+            "includeRoles": [],
+            "excludeRoles": []
+        },
+        "locations": {
+            "includeLocations": ["All"],
+            "excludeLocations": ["10a25087-9bf6-479b-a2a1-37e814310c90"]
+        }
+    },
+    "grantControls": {
+        "operator": "OR",
+        "builtInControls": ["mfa"],
+        "customAuthenticationFactors": [],
+        "termsOfUse": []
+    }
+}, {
+    "id": "ba0047a1-4067-486f-b3ad-28838df44832",
+    "displayName": "Finland",
+    "createdDateTime": "2022-09-16T06:21:15.2906255Z",
+    "modifiedDateTime": null,
+    "state": "enabled",
+    "sessionControls": null,
+    "conditions": {
+        "userRiskLevels": [],
+        "signInRiskLevels": [],
+        "clientAppTypes": ["all"],
+        "servicePrincipalRiskLevels": [],
+        "devices": null,
+        "clientApplications": null,
+        "applications": {
+            "includeApplications": ["All"],
+            "excludeApplications": [],
+            "includeUserActions": [],
+            "includeAuthenticationContextClassReferences": []
+        },
+        "users": {
+            "includeUsers": ["All"],
+            "excludeUsers": ["259fcf40-ff7c-4625-9b78-cd11793f161f"],
+            "includeGroups": [],
+            "excludeGroups": [],
+            "includeRoles": [],
+            "excludeRoles": []
+        },
+        "platforms": {
+            "includePlatforms": ["all"],
+            "excludePlatforms": ["macOS"]
+        },
+        "locations": {
+            "includeLocations": ["10a25087-9bf6-479b-a2a1-37e814310c90"],
+            "excludeLocations": []
+        }
+    },
+    "grantControls": {
+        "operator": "OR",
+        "builtInControls": ["mfa"],
+        "customAuthenticationFactors": [],
+        "termsOfUse": []
+    }
+}]
