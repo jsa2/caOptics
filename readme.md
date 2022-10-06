@@ -61,6 +61,12 @@ Read [other important notes](#important)
 
 # Release notes
 
+    Release notes: 0.6.3 beta
+    - Optimizations to way the mapped objects are handled. 
+      - Mapped objects are cached. You can recreate the object mapping by using parama 'clearMappingCache'
+      - Lookup keys will start from 'user/group/role' conditions always first
+      - Added possibility to populate usermap with random UUID's to test for performance impact (this just debug option, and not really something that would be in non-beta versions)
+    
     Release notes: 0.6.2 beta
     - Separated cache params into separate functions -> (clearTokenCache and ClearPolicyCache)
     - Added possibility of running pre-optimized algorithm on permutations with param --aggressive (High memory consumption, only here for A/B testing)
