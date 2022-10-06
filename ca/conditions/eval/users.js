@@ -6,7 +6,7 @@ const {argv} = require("yargs");
 
 module.exports= function (lookup, innerPol,currentPolicy) {
 
-    
+    const list = inMemoryList()
     let res = []
     innerPol.forEach(policy => {
 
@@ -51,7 +51,7 @@ module.exports= function (lookup, innerPol,currentPolicy) {
             .flat()
                      
 
-            let list = inMemoryList()
+            
 
              //keep for debugging
        /*  if (lookup[1] == "c66aad40-1dee-43c2-810b-77532250bfc8" && policy.displayName.match('francies')) {

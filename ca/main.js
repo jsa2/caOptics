@@ -7,7 +7,7 @@ const chalk = require("chalk");
 const { userMap } = require("./mainPlugins/userMap");
 const { argv } = require("yargs");
 const { nonTerm } = require("./mainPlugins/uniqNonterm");
-const { clearPolicyCache, clearTokenCache } = require("./mainPlugins/clearPolicyCache");
+const { clearPolicyCache, clearTokenCache, clearMappingCache } = require("./mainPlugins/clearPolicyCache");
 const { getPermutations } = require("./mainPlugins/getPol2");
 const { rpCsv } = require("../createCSVreport");
 const { rpLegacy } = require("../createReportLegacy");
@@ -35,6 +35,10 @@ async function main() {
       console.log(chalk.yellow(msg))
     }
 
+  }
+
+  if (argv.clearMappingCache) {
+    clearMappingCache()
   }
 
 

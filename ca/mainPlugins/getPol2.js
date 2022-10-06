@@ -12,13 +12,16 @@ async function getPermutations (g) {
     // Sort is placed to ensure certain termination order
     g.sort((a,b) => {
        
-        if (a.toLowerCase()< b.toLowerCase()) {
+
+        if (a.match('users:')  ) {
             return -1
         }
+
+     /*    if (a.toLowerCase()< b.toLowerCase()) {
+            return -1
+        } */
     
-        if (a.match('users:') ) {
-            return -1
-        }
+       
 
        /*  if (a.match('clientAppTypes:') && !b.match('users:') && !b.match('locations:') ) {
             return -1

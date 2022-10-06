@@ -7,9 +7,17 @@ const waitForIt = require('util').promisify(setTimeout)
 
 async function userMap (policies) {
 
-const oids = []
+try {
+    require('../../objectIds.json')
+    require('../../appIds.json')
+    inMemoryList(require('../../inMemoryResults.json'))
+    console.log('cache loaded from memory')
+    return;
+} catch (error) {
+    console.log('no existing cache')
+}
 
-try {require('fs').unlinkSync('link2.txt')} catch (error) {}
+const oids = []
 
 
 const list = ['includeUsers','excludeUsers','includeGroups','excludeGroups','includeRoles','excludeRoles'].map(type => {
@@ -69,6 +77,9 @@ for await (plugin of gr.filter(s => s?.group == '#microsoft.graph.group')) {
 }
 
 let results = await (await Promise.all(promiseArray)).flat()
+
+require('fs').writeFileSync('inMemoryResults.json',JSON.stringify(results))
+
 
 inMemoryList(results)
 

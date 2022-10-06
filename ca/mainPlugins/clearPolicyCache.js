@@ -1,6 +1,30 @@
 const fs = require('fs')
 const path = require('path')
 
+function clearMappingCache() {
+ 
+   
+    try {
+        fs.unlinkSync(path.resolve(__dirname,'../../inMemoryResults.json'))
+    } catch (error) {
+        console.log('no policies to remove')
+    }
+
+    try {
+        fs.unlinkSync(path.resolve(__dirname,'../../objectIds.json'))
+    } catch (error) {
+        console.log('no policies to remove')
+    }
+
+    try {
+        fs.unlinkSync(path.resolve(__dirname,'../../appIds.json'))
+    } catch (error) {
+        console.log('no policies to remove')
+    }
+
+
+}
+
 
 function clearPolicyCache() {
  
@@ -29,4 +53,4 @@ function clearTokenCache() {
     return;
 }
 
-module.exports= {clearPolicyCache,clearTokenCache}
+module.exports= {clearPolicyCache,clearTokenCache,clearMappingCache}

@@ -51,9 +51,9 @@ async function nTerminatedPolicyConditionsLookupFull(perm, refPol) {
 var cd = 0
 async function iterPols(item, innerPol, pol, collections, lineage) {
     cd++
-
-    if (cd % 100000 == 0) {
-        console.log(cd)
+    
+    if (cd % 100 == 0) {
+        
     }
 
     lineage += `${item.rootItem} -> `
@@ -61,6 +61,8 @@ async function iterPols(item, innerPol, pol, collections, lineage) {
     /* if (lineage.match('users:4c9ad188-5620-4523-b761-6293802db8a6')) {
         console.log()
     } */
+
+   /*  console.log(lineage) */
 
     let terminated = await evalLists(item?.rootItem, innerPol, pol?.policy)
 
