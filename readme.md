@@ -62,6 +62,10 @@ Read [other important notes](#important)
 
 # Release notes
 
+    Release notes: 0.6.4 beta
+    - Get more groups per single call (less batching)
+    - Fix race condition detected when generally using for await loops 
+
     Release notes: 0.6.3 beta
     - Optimizations to way the mapped objects are handled. 
       - Mapped objects are cached. You can recreate the object mapping by using parama 'clearMappingCache'
