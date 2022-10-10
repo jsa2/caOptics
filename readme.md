@@ -44,8 +44,9 @@ After completing the pre-requisites and reading this readme file, consider follo
  Read: [``scope``](#scope)
 
 2. run each scan with [``--clearPolicyCache``](#parameters)
+3. run each scan with [``--clearMappingCache``](#parameters) if you do changes in the groups / users related to policies
 
-3. only policies targeting users and apps are in scope (this is the most common scope, but means for example, that security registration policy is not evaluated)
+4. only policies targeting users and apps are in scope (this is the most common scope, but means for example, that security registration policy is not evaluated)
  Read: [``scope``](#scope)
 
 4. Start with test environment so you get some experience and can set expectations about the tool mechanics
@@ -366,6 +367,7 @@ Currently guest users are mapped just like normal users.
 Param| Description 
 -|-
 ``mapping`` | By default user and group based exclusions are evaluated by objects exact ID. For example if object is excluded by one policy, the object should be found in another policy by it's exact id. <br> Using `` --mapping`` invokes MS Graph to populate relationship between objects in a way that ensures, that for example user can be excluded by userId in one policy, while the evaluation detects that user is included in another policy by a groupId. <br> e.g. ``--mapping`` 
+``clearMappingCache`` | Clears user / group mappings retrieved on earlier run <br> e.g ``--clearMappingCache`` 
 ``skipObjectId `` | Removes ObjectId from permutations. This migth be useful, if you want to exclude break-glass account from results <br> e.g. ``--skipObjectId=bcd27e9b-8974-42ec-a2a1-ba2498b45674,c7a4a639-00e7-47e0-aa9d-ea502bbbd382`` 
 ``skip `` | Removes full permutation category. <br> e.g. ``--skip=users`` 
 ``includeReportOnly `` | Allows mixing reportOnly policies with enabled policies. Remove existing policies before running this by removing the policies.json file in the root, or use ``clearPolicyCache`` option <br> e.g. ``--includeReportOnly`` 

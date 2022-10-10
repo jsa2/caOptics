@@ -11,6 +11,7 @@ rollback.js
 *.JSON
 *.pdf
 *.csv
+*.log
 # exclude from JSON and MD flag
 !_launch.json
 !package.json
