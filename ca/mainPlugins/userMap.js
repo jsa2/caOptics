@@ -41,20 +41,24 @@ let r = await objectResolver(oids)
 require('fs').writeFileSync('objectIds.json',JSON.stringify(r.flat()))
 require('fs').writeFileSync('appIds.json',JSON.stringify(d.flat()))
 
-let gr = newSetA(r,['@odata.type'])
+let gr = newSetA(r,['@odata.type']).filter(s => s?.group == '#microsoft.graph.group')
 //stable
 
 let promiseArray =[]
-for await (plugin of gr.filter(s => s?.group == '#microsoft.graph.group')) {
+for await (let plugin of gr) {
    // console.log(plugin)
     let pluginType = plugin.group.split('microsoft.graph.')[1]
-    var count = 0
-    for (group of plugin?.items) {
+    let count = 0
+    for (let group of plugin?.items) {
         count++
-
+        console.log('groups handled',count, group?.displayName, group?.id)
         if (count % 2 == 0) {
             console.log('throttling main operations for groups')
             await waitForIt(1500)
+        }
+
+        if ( group?.displayName.toLowerCase().match('all')) {
+            console.log('sd')
         }
 
        let altItem ={

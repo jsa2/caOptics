@@ -104,11 +104,11 @@ async function main() {
   // For each policy handle the conditions
   // Before calculation of permutations
 
-  for await (policy of policies) {
+  for await (let policy of policies) {
 
     console.log('inspecting policy:', policy?.displayName)
     const perPolicyPermutations = []
-    for await (plugin of evaluationPlugins) {
+    for await (let plugin of evaluationPlugins) {
 
       try {
         let cases = iteratePolicyKeys(`${plugin.split('.js')[0]}`, policy, [])

@@ -31,7 +31,7 @@ module.exports= async function (notUsed) {
     let count = 0
     let promiseArray = []
 
-    for await (item of roles) {
+    for await (let item of roles) {
         count++
         console.log(count)
         // Throttling state 

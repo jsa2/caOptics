@@ -14,13 +14,13 @@ const v8 = require('v8')
 async function nTerminatedPolicyConditionsLookupFull(perm, refPol) {
     const ret = []
     var count = 0
-    for await (pol of perm) {
+    for await (let pol of perm) {
         //console.log(pol)
         const { toProcessingPipeline } = pol
         /*       let innerPol = refPol.filter(p => p?.id !== pol?.policy?.id ) */
         let innerPol = refPol
 
-        for await (indiv of toProcessingPipeline) {
+        for await (let indiv of toProcessingPipeline) {
             if (argv.debug) {
 
                 let hstats = v8.getHeapStatistics()
@@ -81,7 +81,7 @@ async function iterPols(item, innerPol, pol, collections, lineage) {
 
     if (item?.subItems?.length > 0 && terminated.length > 0) {
 
-        for await (sub of item?.subItems) {
+        for await (let sub of item?.subItems) {
             await iterPols(sub, terminated, pol, collections, lineage)
         }
 
@@ -96,13 +96,13 @@ async function TerminatedPolicyConditionsLookupFull(perm, refPol) {
 
     let termArra = []
 
-    for await (pol of perm) {
+    for await (let pol of perm) {
         const { toProcessingPipeline } = pol
 
         // Filter the policy itself out of innerPolicies
         let innerPol = refPol.filter(p => p?.id !== pol?.policy?.id)
 
-        for await (indiv of toProcessingPipeline) {
+        for await (let indiv of toProcessingPipeline) {
             let sectionArray = []
 
 
@@ -112,7 +112,7 @@ async function TerminatedPolicyConditionsLookupFull(perm, refPol) {
 
 
 
-            for await (sub of indiv.subItems.filter(s => s?.match(':'))) {
+            for await (let sub of indiv.subItems.filter(s => s?.match(':'))) {
 
 
 

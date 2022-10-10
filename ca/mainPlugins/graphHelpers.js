@@ -13,7 +13,7 @@ async function appResolver (oids) {
     let count = 0
     let promiseArray = []
 
-    for await (id of new Set(oids)) {
+    for await (let id of new Set(oids)) {
         count++
         console.log(count)
         // Throttling state 
@@ -52,7 +52,7 @@ async function objectResolver (oids) {
     let count = 0
     let promiseArray = []
 
-    for await (id of new Set(oids)) {
+    for await (let id of new Set(oids)) {
         count++
         console.log(count)
         // Throttling state 
@@ -115,6 +115,10 @@ async function graphListS2 (token, operation, skiptoken, responseCollector) {
     }
 
 //console.log(options)
+
+if (operation.match('e051cf')) {
+    console.log()
+}
     
 var data = await axiosClient2(options).catch((error) => {
     console.log(error?.error?.message)
