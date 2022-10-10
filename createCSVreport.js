@@ -62,8 +62,8 @@ console.log('')
         if (resolved) {
           id = id.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName}`)
        
-          csvBody+=`${id},`
-        } else {  csvBody+=`${id},`}
+          csvBody+=`"${id}",`
+        } else {  csvBody+=`"${id}",`}
       } else {
         csvBody+=","
       }
@@ -73,22 +73,22 @@ console.log('')
         let resolved = appMap?.find( s=>  s?.appId == id ) 
         if (resolved) {
           id = id.replace(id,resolved?.displayName)
-          csvBody+=`${id},`
-        } else {  csvBody+=`${id},`}
+          csvBody+=`"${id}",`
+        } else {  csvBody+=`"${id}",`}
       } else {
         csvBody+=","
       }
 
       if (JSON.stringify(details).match('clientAppTypes:')) {
         let id = details.split('clientAppTypes:')[1].split(' ->')[0]
-          csvBody+=`${id},`
+          csvBody+=`"${id}",`
       } else {
         csvBody+=","
       }
 
       if (JSON.stringify(details).match('Platforms:')) {
         let id = details.split('Platforms:')[1].split(' ->')[0]
-          csvBody+=`${id},`
+          csvBody+=`"${id}",`
       } else {
         csvBody+=","
       }
@@ -98,15 +98,15 @@ console.log('')
         let resolved = namedLocations?.find( s=>  s?.id == id ) 
         if (resolved) {
           id = id.replace(id,resolved?.displayName)
-          csvBody+=`${id},`
-        } else {  csvBody+=`${id},`}
+          csvBody+=`"${id}",`
+        } else {  csvBody+=`"${id}",`}
       } else {
         csvBody+=","
       }
 
 
      csvBody+=`${item?.terminated?.length},`
-     csvBody+=`${item?.lineage}`
+     csvBody+=`"${item?.lineage}"`
      csvBody+="\r\n"
 
 
