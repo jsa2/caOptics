@@ -51,9 +51,15 @@ console.log('')
     })
 
    // console.log(sorted)
+    let cn = 0
+    for (let item of sorted) {
+
+      cn++
+    if (cn % 1000 == 0) {
+      console.log(cn, 'of /', sorted.length)
+    }
     
-    for (item of sorted) {
-      var csvBody =""
+      let csvBody =""
       let details = item?.lineage
   
       if (JSON.stringify(details).match('users:')) {

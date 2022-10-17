@@ -46,9 +46,14 @@ function rp (perms,cross, unparsed) {
 
    // console.log(sorted)
     
-    for (item of sorted) {
+   let cn = 0
+   for (let item of sorted) {
+    cn++
+    if (cn % 1000 == 0) {
+      console.log(cn, 'of /', sorted.length)
+    }
 
-      var details 
+      let details 
       if (item.terminated.length == 0) {
           details = `${item.lineage}`
       } else {
