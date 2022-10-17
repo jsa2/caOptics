@@ -62,6 +62,10 @@ Read [other important notes](#important)
 
 # Release notes
 
+    Release notes: 0.6.5 beta
+    - Added counter to reporting when high number of permutations is also added to report (default is to add only unterminated)
+    - Minor code fixes changing <var> to <let> 
+
     Release notes: 0.6.4 beta
     - Get more groups per single call (less batching)
     - Fix race condition detected when generally using for await loops 
