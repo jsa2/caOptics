@@ -11,6 +11,7 @@ const { clearPolicyCache, clearTokenCache, clearMappingCache } = require("./main
 const { getPermutations } = require("./mainPlugins/getPol2");
 const { rpCsv } = require("../createCSVreport");
 const { rpLegacy } = require("../createReportLegacy");
+const { decode } = require("jsonwebtoken");
 
 
 main()
@@ -194,9 +195,18 @@ If all platforms should be alt param
 
   } else {
 
-    rp(mix, true)
+    /* 
+    // add userName and date to reports  
+    */
+   let now = new Date()
+    let fileName = `report_day_${now.getDay()}_month_${now.getMonth()}_year_${now.getFullYear()}-tenant_${decode(await getGraphTokenReducedScope())?.tid}`
+    
+    console.log(chalk.green('writing report to', ` ${fileName}.csv` ))
+    console.log(chalk.green('writing report to', ` ${fileName}.md` ))
+  
+    rp(mix, true,undefined,fileName)
 
-    rpCsv(mix,true)
+    rpCsv(mix,true,undefined,fileName)
 
   }
 

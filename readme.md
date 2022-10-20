@@ -65,6 +65,7 @@ Read [other important notes](#important)
     Release notes: 0.6.5 beta
     - Added counter to reporting when high number of permutations is also added to report (default is to add only unterminated)
     - Minor code fixes changing <var> to <let> 
+    - Report filename now includes day, month, year and tenantId e.g. report_day_4_month_9_year_2022-tenant_48f55450-183a-45d6-a9ce-68f3cbc68947.csv
 
     Release notes: 0.6.4 beta
     - Get more groups per single call (less batching)

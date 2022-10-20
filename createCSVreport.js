@@ -6,10 +6,10 @@ const { argv } = require('yargs')
 const beautify = require('js-beautify').js
 
 
-function rpCsv (perms,cross, unparsed) {
+function rpCsv (perms,cross, unparsed,filename) {
 
   try {
-    unlinkSync('report.csv')
+    unlinkSync(`${filename}.csv`)
   } catch(error) {
 console.log('')
   }
@@ -27,7 +27,7 @@ console.log('')
     }
 
     var csvReportHeader ="users,Applications,clientAppTypes,Platforms,locations,terminations, lineage \r\n"
-    appendFileSync('report.csv',csvReportHeader)
+    appendFileSync(`${filename}.csv`,csvReportHeader)
    
   
 
@@ -116,7 +116,7 @@ console.log('')
      csvBody+="\r\n"
 
 
-     appendFileSync('report.csv',csvBody)
+     appendFileSync(`${filename}.csv`,csvBody)
      
 
        
