@@ -6,7 +6,7 @@ const { argv } = require('yargs')
 const beautify = require('js-beautify').js
 
 
-function rp (perms,cross, unparsed) {
+function rp (perms,cross, unparsed, fileName) {
 
     const namedLocations = require('./namedLocations.json')
     var objectIdMap
@@ -136,7 +136,7 @@ function rp (perms,cross, unparsed) {
     }
    
     if (cross) {
-      writeFileSync('crosstable.md',table)
+      writeFileSync(`${fileName}.md`,table)
 
     //appendFileSync('crosstable.md',details)
     } else {

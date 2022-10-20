@@ -395,7 +395,7 @@ async function getLocations() {
         }
 
         let { data } = await axios(opt).catch(error => {
-            console.log(error?.response)
+            console.log(error?.response?.data)
         })
 
         fs.writeFileSync('namedLocations.json', JSON.stringify(data?.value))
