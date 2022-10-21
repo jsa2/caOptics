@@ -293,7 +293,7 @@ async function getPolicies() {
         }
 
         var opt = {
-            url: "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies",
+            url: `https://${argv.altGraph || "graph.microsoft.com"}/v1.0/identity/conditionalAccess/policies`,
             headers
         }
 
@@ -334,48 +334,6 @@ async function getPolicies() {
 }
 
 
-async function getPoliciesFresh() {
-
-    try {
-        return require('../../policies.json')
-    } catch (error) {
-
-
-        let tkn = await getGraphTokenReducedScope()
-
-        let headers = {
-            authorization: `bearer ${tkn}`
-        }
-
-        var opt = {
-            url: "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies",
-            headers
-        }
-
-        let { data } = await axios(opt).catch(error => {
-            console.log(error?.response?.data || error)
-        })
-
-        let p
-
-        if (argv.includeReportOnly) {
-            p = data?.value.filter(s => s.conditions?.devices?.deviceFilter?.mode == undefined && s.conditions.applications?.includeApplications.length > 0 && s.grantControls?.builtInControls)
-
-        } else {
-            p = data?.value.filter(s => s?.state == 'enabled' && s.conditions?.devices?.deviceFilter?.mode == undefined && s.conditions.applications?.includeApplications.length > 0 && s.grantControls?.builtInControls)
-        }
-
-
-        // filter out device and security registration policies
-        fs.writeFileSync('policies.json', JSON.stringify(p))
-
-    }
-
-    return await getPolicies()
-
-}
-
-
 
 async function getLocations() {
 
@@ -390,7 +348,7 @@ async function getLocations() {
         }
 
         var opt = {
-            url: "https://graph.microsoft.com/beta/conditionalAccess/namedLocations",
+            url: `https://${argv.altGraph || "graph.microsoft.com"}/beta/conditionalAccess/namedLocations`,
             headers
         }
 
@@ -406,4 +364,4 @@ async function getLocations() {
 
 }
 
-module.exports = { getAllExclusions, getPolicies, getLocations, TerminatedPolicyConditionsLookup, iteratePolicyKeys, TerminatedPolicyConditionsLookupFull, nTerminatedPolicyConditionsLookupFull, iteratePolicyKeyNonArray, getPoliciesFresh }
+module.exports = { getAllExclusions, getPolicies, getLocations, TerminatedPolicyConditionsLookup, iteratePolicyKeys, TerminatedPolicyConditionsLookupFull, nTerminatedPolicyConditionsLookupFull, iteratePolicyKeyNonArray }

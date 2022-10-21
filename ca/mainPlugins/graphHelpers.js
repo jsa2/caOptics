@@ -1,5 +1,6 @@
 const { default: axios } = require("axios")
 const chalk = require("chalk")
+const { argv } = require("yargs")
 const { axiosClient } = require("../../tokenHandler/axioshelpers")
 const { axiosClient2 } = require("./axiosh")
 const { newSetA } = require("./grouper")
@@ -23,7 +24,7 @@ async function appResolver (oids) {
         }
         //  Get any object in Graph by ID
         let opt = {
-            url:`https://graph.microsoft.com/v1.0/serviceprincipals?$search="appId:${id}"&$select=appid,displayName,id`,
+            url:`https://${argv.altGraph || "graph.microsoft.com"}/v1.0/serviceprincipals?$search="appId:${id}"&$select=appid,displayName,id`,
             headers:{
                 authorization: `Bearer ${token}`,
                 ConsistencyLevel:"eventual"
@@ -62,7 +63,7 @@ async function objectResolver (oids) {
         }
         //  Get any object in Graph by ID
         let opt = {
-            url:`https://graph.microsoft.com/v1.0/directoryObjects/${id}`,
+            url:`https://${argv.altGraph || "graph.microsoft.com"}/v1.0/directoryObjects/${id}`,
             headers:{
                 authorization: `Bearer ${token}`
             }
@@ -101,7 +102,7 @@ async function graphListS2 (token, operation, skiptoken, responseCollector) {
     var options = {
         responseType: 'json',
         "method": "get",
-        url:`https://graph.microsoft.com/v1.0/${operation}`,
+        url:`https://${argv.altGraph || "graph.microsoft.com"}/v1.0/${operation}`,
         headers:{
             'content-type':"application/json",
             authorization:"bearer " + token
@@ -149,7 +150,7 @@ async function graphListS (token, operation, skiptoken, responseCollector) {
     var options = {
         responseType: 'json',
         "method": "get",
-        url:`https://graph.microsoft.com/v1.0/${operation}`,
+        url:`https://${argv.altGraph || "graph.microsoft.com"}/v1.0/${operation}`,
         headers:{
             'content-type':"application/json",
             authorization:"bearer " + token
