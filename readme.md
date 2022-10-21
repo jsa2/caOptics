@@ -62,6 +62,9 @@ Read [other important notes](#important)
 
 # Release notes
 
+    Release notes: 0.6.6 beta
+    - Allow use of different login endpoints for login and graph with params: --altLogin --altGraph
+
     Release notes: 0.6.5 beta
     - Added counter to reporting when high number of permutations is also added to report (default is to add only unterminated)
     - Minor code fixes changing <var> to <let> 

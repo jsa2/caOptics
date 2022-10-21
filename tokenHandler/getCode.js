@@ -14,7 +14,7 @@ var data={
 
 var opt = {
     method:"post",
-    url:`https://login.microsoftonline.com/${argv?.tid || "common"}/oauth2/v2.0/devicecode?api-version=1.0`,
+    url:`https://${argv.altLogin || "login.microsoftonline.com"}/${argv?.tid || "common"}/oauth2/v2.0/devicecode?api-version=1.0`,
     data
 }
 let errorP 
@@ -35,7 +35,7 @@ if (errorP) {
         
         data.grant_type="device_code",
         data.code=at?.data?.device_code
-        opt.url="https://login.microsoftonline.com/common/oauth2/v2.0/token"
+        opt.url=`https://${argv.altLogin || "login.microsoftonline.com"}/common/oauth2/v2.0/token`
         delete opt.data; opt.data = data
        
         i++

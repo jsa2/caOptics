@@ -15,7 +15,7 @@ async function rToken () {
 
     let opt = {
         method:"post",
-        url:`https://login.microsoftonline.com/common/oauth2/v2.0/token`,
+        url:`https://${argv.altLogin || "login.microsoftonline.com"}/common/oauth2/v2.0/token`,
         data
     }
 
