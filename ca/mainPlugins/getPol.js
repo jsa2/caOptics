@@ -293,7 +293,7 @@ async function getPolicies() {
         }
 
         var opt = {
-            url: `https://${argv.altGraph || "graph.microsoft.com"}/beta/identity/conditionalAccess/policies`,
+            url: `https://${argv.altGraph || "graph.microsoft.com"}/v1.0/identity/conditionalAccess/policies`,
             headers
         }
 
