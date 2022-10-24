@@ -40,6 +40,9 @@ If you are new to Conditional Access we recommend that you review the following 
 
 After completing the pre-requisites and reading this readme file, consider following:
 
+>⚠ Policies that are only available from /beta/ endpoint are automatically excluded from scope. This includes any new policy with guest settings at the time of writing
+
+
 1. reportOnly policies are not considered terminating:
  Read: [``scope``](#scope)
 
