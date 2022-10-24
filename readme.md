@@ -17,6 +17,7 @@
       - [Lookup differences](#lookup-differences)
       - [Group nesting](#group-nesting)
   - [Parameters](#parameters)
+    - [supplying parameters from launch.json (debugging in VSCode)?](#supplying-parameters-from-launchjson-debugging-in-vscode)
   - [Running the tool](#running-the-tool)
   - [Viewing reports](#viewing-reports)
   - [Troubleshooting](#troubleshooting)
@@ -64,6 +65,10 @@ Read [other important notes](#important)
 ---
 
 # Release notes
+
+    Release notes: 0.6.6-7 beta
+    - Allow use of different login endpoints for login and graph with params: --altLogin --altGraph
+    - Allow use of custom filtering for policies (this only recommended, when the policies do not adhere to expected schema)
 
     Release notes: 0.6.5 beta
     - Added counter to reporting when high number of permutations is also added to report (default is to add only unterminated)
@@ -389,6 +394,53 @@ Param| Description
 ``clearTokenCache `` | Removes token caches <br> e.g. ``--clearTokenCache`` 
 ``allTerminations`` | Includes also results that terminated to policy <br> ``--allTerminations``
 ``debug`` | Shows memory use and estimation of progress <br> eg. ``--debug``
+``altLogin `` | Allows defining alternative login endpoint FQDN <br> eg. ``--altLogin=login.microsoft.com.alt``
+``altGraph `` | Allows defining alternative graph endpoint FQDN <br> eg. ``--altGraph=graph.microsoft.com.alt`` 
+``customPolicyFilter `` | Allow use of custom filtering for policies (this only recommended, when the policies do not adhere to expected schema) <br> eg. ``--customPolicyFilter`` <br> You can modify the filter by selecting [``customPolicyFilter.js``](ca/mainPlugins/customPolicyFilter.js) 
+
+
+### supplying parameters from launch.json (debugging in VSCode)?
+
+
+copy the current json schema and create file named launch.json in folder ``.vscode/launch.json``
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+"program": "${workspaceFolder}/ca/main.js",
+//"program": "${file}",
+            "args":  [
+                "--skipObjectId=259fcf40-ff7c-4625-9b78-cd11793f161f",
+               "--mapping",
+              "--clearMappingCache",
+               "--clearPolicyCache",
+               "--clearTokenCache",
+               "--customPolicyFilter",
+             //  "--altGraph=graph.microsoft.com",
+              // "--allPlatforms",
+             //   "--includeReportOnly",
+                //"--inject",
+            //"--clearPolicyCache",
+              // "--skipCleaning",
+             // "--allTerminations",
+             // "--aggressive",
+             "--debug",
+            ],
+            "runtimeArgs": [
+                "--max-old-space-size=4096"
+            ]
+        }
+    ]
+  }
+```
 
 ## Running the tool
 
