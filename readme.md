@@ -17,6 +17,7 @@
       - [Lookup differences](#lookup-differences)
       - [Group nesting](#group-nesting)
   - [Parameters](#parameters)
+    - [supplying parameters from launch.json (debugging in VSCode)?](#supplying-parameters-from-launchjson-debugging-in-vscode)
   - [Running the tool](#running-the-tool)
   - [Viewing reports](#viewing-reports)
   - [Troubleshooting](#troubleshooting)
@@ -64,6 +65,10 @@ Read [other important notes](#important)
 ---
 
 # Release notes
+
+    Release notes: 0.6.6-7 beta
+    - Allow use of different login endpoints for login and graph with params: --altLogin --altGraph
+    - Allow use of custom filtering for policies (this only recommended, when the policies do not adhere to expected schema)
 
     Release notes: 0.6.5 beta
     - Added counter to reporting when high number of permutations is also added to report (default is to add only unterminated)
@@ -307,7 +312,7 @@ Current Design requires that all conditions are matched with 'All' platforms pol
         },
 ```
 
-**reference** https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-conditions#device-platforms
+**Reference** https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-conditions#device-platforms
 
 
 > **Important** <br> *Microsoft recommends that you have a Conditional Access policy for unsupported device platforms. As an example, if you want to block access to your corporate resources from Chrome OS or any other unsupported clients, you should configure a policy with a Device platforms condition that includes any device and excludes supported device platforms and Grant control set to Block access.* 
@@ -356,8 +361,9 @@ Current Design requires that all conditions are matched with 'All' platforms pol
 
 3. Guest lookup
    
-Users are not mapped as guests at this release. This feature will be introduced later enabling catching inclusions/exclusions of guest userId's to correctly mapped to ``GuestsOrExternalUsers`` property.
+>Users are not mapped as guests at this release. This feature will be introduced later enabling catching inclusions/exclusions of guest userId's to correctly mapped to ``GuestsOrExternalUsers`` property.
 Currently guest users are mapped just like normal users.
+>
 
 #### Group nesting
 
@@ -389,6 +395,53 @@ Param| Description
 ``clearTokenCache `` | Removes token caches <br> e.g. ``--clearTokenCache`` 
 ``allTerminations`` | Includes also results that terminated to policy <br> ``--allTerminations``
 ``debug`` | Shows memory use and estimation of progress <br> eg. ``--debug``
+``altLogin `` | Allows defining alternative login endpoint FQDN <br> eg. ``--altLogin=login.microsoft.com.alt``
+``altGraph `` | Allows defining alternative graph endpoint FQDN <br> eg. ``--altGraph=graph.microsoft.com.alt`` 
+``customPolicyFilter `` | Allow use of custom filtering for policies (this only recommended, when the policies do not adhere to expected schema) <br> eg. ``--customPolicyFilter`` <br> You can modify the filter by selecting [``customPolicyFilter.js``](ca/mainPlugins/customPolicyFilter.js) 
+
+
+### supplying parameters from launch.json (debugging in VSCode)?
+
+
+copy the current json schema and create file named launch.json in folder ``.vscode/launch.json``
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+"program": "${workspaceFolder}/ca/main.js",
+//"program": "${file}",
+            "args":  [
+                "--skipObjectId=259fcf40-ff7c-4625-9b78-cd11793f161f",
+               "--mapping",
+              "--clearMappingCache",
+               "--clearPolicyCache",
+               "--clearTokenCache",
+               "--customPolicyFilter",
+             //  "--altGraph=graph.microsoft.com",
+              // "--allPlatforms",
+             //   "--includeReportOnly",
+                //"--inject",
+            //"--clearPolicyCache",
+              // "--skipCleaning",
+             // "--allTerminations",
+             // "--aggressive",
+             "--debug",
+            ],
+            "runtimeArgs": [
+                "--max-old-space-size=4096"
+            ]
+        }
+    ]
+  }
+```
 
 ## Running the tool
 

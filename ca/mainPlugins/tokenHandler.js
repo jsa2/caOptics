@@ -8,6 +8,8 @@ const { rToken } = require('../../tokenHandler/refresh')
 const wexc = require('util').promisify(exec)
 const chalk = require("chalk");
 const { stdout } = require('process')
+const { argv } = require('yargs')
+
 
 
 async function getGraphTokenReducedScope() {
@@ -35,7 +37,7 @@ async function getGraphTokenReducedScope() {
 
             try {
                 token = {}
-                let {stdout} = await wexc('az account get-access-token --scope=https://graph.microsoft.com/Directory.AccessAsUser.All --query accessToken --output json')
+                let {stdout} = await wexc(`az account get-access-token --scope=https://${argv.altGraph || "graph.microsoft.com"}/Directory.AccessAsUser.All --query accessToken --output json`)
                 token.access_token =""                
                 token.access_token = JSON.parse(stdout)
                 require('fs').writeFileSync('tokenHandler/token.json',JSON.stringify(token.access_token))
