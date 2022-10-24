@@ -40,6 +40,9 @@ If you are new to Conditional Access we recommend that you review the following 
 
 After completing the pre-requisites and reading this readme file, consider following:
 
+>⚠ Policies that are only available from /beta/ endpoint are automatically excluded from scope. This includes any new policy with guest settings at the time of writing
+
+
 1. reportOnly policies are not considered terminating:
  Read: [``scope``](#scope)
 
@@ -61,9 +64,6 @@ Read [other important notes](#important)
 ---
 
 # Release notes
-
-    Release notes: 0.6.6 beta
-    - Allow use of different login endpoints for login and graph with params: --altLogin --altGraph
 
     Release notes: 0.6.5 beta
     - Added counter to reporting when high number of permutations is also added to report (default is to add only unterminated)
