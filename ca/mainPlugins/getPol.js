@@ -323,6 +323,12 @@ async function getPolicies() {
             )
         }
 
+        if (argv.customPolicyFilter) {
+            p = require('../mainPlugins/customPolicyFilter')(data)
+        }
+
+        
+
 
         // filter out device and security registration policies
         fs.writeFileSync('policies.json', JSON.stringify(p))
