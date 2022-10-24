@@ -312,7 +312,7 @@ Current Design requires that all conditions are matched with 'All' platforms pol
         },
 ```
 
-**reference** https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-conditions#device-platforms
+**Reference** https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-conditions#device-platforms
 
 
 > **Important** <br> *Microsoft recommends that you have a Conditional Access policy for unsupported device platforms. As an example, if you want to block access to your corporate resources from Chrome OS or any other unsupported clients, you should configure a policy with a Device platforms condition that includes any device and excludes supported device platforms and Grant control set to Block access.* 
@@ -361,8 +361,9 @@ Current Design requires that all conditions are matched with 'All' platforms pol
 
 3. Guest lookup
    
-Users are not mapped as guests at this release. This feature will be introduced later enabling catching inclusions/exclusions of guest userId's to correctly mapped to ``GuestsOrExternalUsers`` property.
+>Users are not mapped as guests at this release. This feature will be introduced later enabling catching inclusions/exclusions of guest userId's to correctly mapped to ``GuestsOrExternalUsers`` property.
 Currently guest users are mapped just like normal users.
+>
 
 #### Group nesting
 
