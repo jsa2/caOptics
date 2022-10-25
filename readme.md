@@ -162,7 +162,7 @@ npm install;
 **Fire and forget run setup for Azure Cloud Shell (Bash)**
 
 ```bash
-curl -o- https://raw.githubusercontent.com/jsa2/caOptics/public/init.sh | bash;
+curl -o- https://raw.githubusercontent.com/jsa2/caOptics/main/init.sh | bash;
 # Force reload of NVM
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
