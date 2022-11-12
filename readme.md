@@ -425,6 +425,7 @@ copy the current json schema and create file named launch.json in folder ``.vsco
                "--clearPolicyCache",
                "--clearTokenCache",
                "--customPolicyFilter",
+               "--allowPreviewPolicies=beta",
              //  "--altGraph=graph.microsoft.com",
               // "--allPlatforms",
              //   "--includeReportOnly",
