@@ -398,6 +398,7 @@ Param| Description
 ``altLogin `` | Allows defining alternative login endpoint FQDN <br> eg. ``--altLogin=login.microsoft.com.alt``
 ``altGraph `` | Allows defining alternative graph endpoint FQDN <br> eg. ``--altGraph=graph.microsoft.com.alt`` 
 ``customPolicyFilter `` | Allow use of custom filtering for policies (this only recommended, when the policies do not adhere to expected schema) <br> eg. ``--customPolicyFilter`` <br> You can modify the filter by selecting [``customPolicyFilter.js``](ca/mainPlugins/customPolicyFilter.js) 
+``--allowPreviewPolicies`` | Allows use of beta endpoint for policies  <br> eg.``--allowPreviewPolicies``
 
 
 ### supplying parameters from launch.json (debugging in VSCode)?
