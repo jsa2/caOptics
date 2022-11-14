@@ -66,6 +66,9 @@ Read [other important notes](#important)
 
 # Release notes
 
+    Release notes: 0.6.8
+    - When you update policy with any guest conditions in GUI that policy will be only available from the beta endpoint after the update (during preview). This update brings normalization for policies that are transfered to beta endpoint due to this behaviour. The policy will be evaluated like the previous guest conditions as long as the following conditions are included "internalGuest,b2bCollaborationGuest,b2bCollaborationMember" and no tenants are excluded from the policy 
+
     Release notes: 0.6.6-7 beta
     - Allow use of different login endpoints for login and graph with params: --altLogin --altGraph
     - Allow use of custom filtering for policies (this only recommended, when the policies do not adhere to expected schema)
