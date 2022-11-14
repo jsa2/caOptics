@@ -24,9 +24,9 @@ async function nTerminatedPolicyConditionsLookupFull(perm, refPol) {
             if (argv.debug) {
 
                 let hstats = v8.getHeapStatistics()
-                console.log((`Memory usage at: ${hstats.used_heap_size/(1024*1024)} for nTerminatedPolicyConditionsLookupFull`))
-                console.log('heap size: ',hstats.heap_size_limit/(1024*1024))
-                console.log('heap used: ',hstats.used_heap_size/(1024*1024))
+                console.log((`Memory usage at: ${hstats.used_heap_size / (1024 * 1024)} for nTerminatedPolicyConditionsLookupFull`))
+                console.log('heap size: ', hstats.heap_size_limit / (1024 * 1024))
+                console.log('heap used: ', hstats.used_heap_size / (1024 * 1024))
 
             }
 
@@ -51,9 +51,9 @@ async function nTerminatedPolicyConditionsLookupFull(perm, refPol) {
 var cd = 0
 async function iterPols(item, innerPol, pol, collections, lineage) {
     cd++
-    
+
     if (cd % 100 == 0) {
-        
+
     }
 
     lineage += `${item.rootItem} -> `
@@ -62,7 +62,7 @@ async function iterPols(item, innerPol, pol, collections, lineage) {
         console.log()
     } */
 
-   /*  console.log(lineage) */
+    /*  console.log(lineage) */
 
     let terminated = await evalLists(item?.rootItem, innerPol, pol?.policy)
 
@@ -292,8 +292,13 @@ async function getPolicies() {
             authorization: `bearer ${tkn}`
         }
 
+        let version
+        if (argv.allowPreviewPolicies) {
+            version = "beta"
+        }
+
         var opt = {
-            url: `https://${argv.altGraph || "graph.microsoft.com"}/v1.0/identity/conditionalAccess/policies`,
+            url: `https://${argv.altGraph || "graph.microsoft.com"}/${version || "v1.0"}/identity/conditionalAccess/policies`,
             headers
         }
 
@@ -317,6 +322,7 @@ async function getPolicies() {
                 s?.state == 'enabled'
                 && s.conditions?.devices?.deviceFilter?.mode !== 'include'
                 && s.conditions.applications?.includeApplications.length > 0
+                && !s.conditions.applications?.applicationFilter
                 && s.grantControls?.builtInControls
                 && s.conditions?.userRiskLevels == 0
                 && s.conditions?.signInRiskLevels == 0
@@ -327,7 +333,34 @@ async function getPolicies() {
             p = require('../mainPlugins/customPolicyFilter')(data)
         }
 
-        
+        if (argv.allowPreviewPolicies) {
+            /* 
+            // New guest policies
+            // Normalize matching new guest policies to match existing gap detection logic, when at least following conditions "internalGuest,b2bCollaborationGuest,b2bCollaborationMember" are included (and also not excluded in the same policy)
+            
+            */
+            p.filter(s => s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes)
+                .filter(s => s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('internalGuest')
+                    && s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationGuest')
+                    && s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationMember')
+                    && !s.conditions?.users?.excludeGuestsOrExternalUsers
+                    && s.conditions.users?.includeGuestsOrExternalUsers.externalTenants["@odata.type"] == '#microsoft.graph.conditionalAccessAllExternalTenants'
+                    && s.conditions.users?.includeGuestsOrExternalUsers.externalTenants?.membershipKind == 'all'
+                ).map(s => {
+                    s.conditions.users = {
+                        includeUsers: ["GuestsOrExternalUsers"],
+                        excludeUsers: [],
+                        includeGroups: [],
+                        excludeGroups: [],
+                        includeRoles: [],
+                        excludeRoles: [],
+                        includeGuestsOrExternalUsers: null,
+                        excludeGuestsOrExternalUsers: null,
+                    }
+                })
+
+        }
+
 
 
         // filter out device and security registration policies
