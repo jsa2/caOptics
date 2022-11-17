@@ -357,8 +357,8 @@ async function getPolicies() {
                 .filter(s => s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('internalGuest')
                     || s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationGuest')
                     ||s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationMember')
-                    && s.conditions.users?.includeGuestsOrExternalUsers.externalTenants["@odata.type"] == '#microsoft.graph.conditionalAccessAllExternalTenants'
-                    && s.conditions.users?.includeGuestsOrExternalUsers.externalTenants?.membershipKind == 'all'
+                    && s.conditions.users?.excludeGuestsOrExternalUsers.externalTenants["@odata.type"] == '#microsoft.graph.conditionalAccessAllExternalTenants'
+                    && s.conditions.users?.excludeGuestsOrExternalUsers.externalTenants?.membershipKind == 'all'
                 ).map(s => {
                     s.conditions.users.excludeUsers.push('GuestsOrExternalUsers')
                 })
