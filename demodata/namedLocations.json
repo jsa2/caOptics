@@ -1,0 +1,30 @@
+[{
+    "@odata.type": "#microsoft.graph.ipNamedLocation",
+    "id": "0935449a-60af-42b0-a4aa-94ff2a203d90",
+    "displayName": "87.92.160.34",
+    "modifiedDateTime": "2022-08-15T10:26:57.0242157Z",
+    "createdDateTime": "2022-05-10T04:11:15.671631Z",
+    "isTrusted": true,
+    "ipRanges": [{
+        "@odata.type": "#microsoft.graph.iPv4CidrRange",
+        "cidrAddress": "87.92.49.122/32"
+    }]
+}, {
+    "@odata.type": "#microsoft.graph.countryNamedLocation",
+    "id": "10a25087-9bf6-479b-a2a1-37e814310c90",
+    "displayName": "finland",
+    "modifiedDateTime": "2022-08-15T10:27:12.3296971Z",
+    "createdDateTime": "2022-08-15T10:27:12.3296971Z",
+    "countriesAndRegions": ["FI"],
+    "includeUnknownCountriesAndRegions": false,
+    "countryLookupMethod": "clientIpAddress"
+}, {
+    "@odata.type": "#microsoft.graph.countryNamedLocation",
+    "id": "1786d979-9a7d-49dc-aa76-a5f4358976bd",
+    "displayName": "switzerland",
+    "modifiedDateTime": "2022-08-23T16:26:55.6296287Z",
+    "createdDateTime": "2022-08-23T16:26:55.6296287Z",
+    "countriesAndRegions": ["CH"],
+    "includeUnknownCountriesAndRegions": false,
+    "countryLookupMethod": "clientIpAddress"
+}]

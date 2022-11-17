@@ -1,0 +1,323 @@
+[
+    {
+        "id": "ef679df2-01b8-462e-9416-c2523f0af464",
+        "displayName": "baseline",
+        "createdDateTime": "2022-09-15T06:10:38.2298929Z",
+        "modifiedDateTime": "2022-09-15T06:26:20.3720207Z",
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+            "userRiskLevels": [],
+            "signInRiskLevels": [],
+            "clientAppTypes": [
+                "all"
+            ],
+            "servicePrincipalRiskLevels": [],
+            "platforms": null,
+            "devices": null,
+            "clientApplications": null,
+            "applications": {
+                "includeApplications": [
+                    "All"
+                ],
+                "excludeApplications": [],
+                "includeUserActions": [],
+                "includeAuthenticationContextClassReferences": []
+            },
+            "users": {
+                "includeUsers": [
+                    "All"
+                ],
+                "excludeUsers": [
+                    "259fcf40-ff7c-4625-9b78-cd11793f161f",
+                    "GuestsOrExternalUsers"
+                ],
+                "includeGroups": [],
+                "excludeGroups": [],
+                "includeRoles": [],
+                "excludeRoles": []
+            },
+            "locations": {
+                "includeLocations": [
+                    "All"
+                ],
+                "excludeLocations": [
+                    "10a25087-9bf6-479b-a2a1-37e814310c90"
+                ]
+            }
+        },
+        "grantControls": {
+            "operator": "OR",
+            "builtInControls": [
+                "mfa"
+            ],
+            "customAuthenticationFactors": [],
+            "termsOfUse": []
+        }
+    },
+    {
+        "id": "28a28af3-9878-479e-b10e-a0cbf682d413",
+        "displayName": "finski",
+        "createdDateTime": "2022-09-15T06:10:38.9417468Z",
+        "modifiedDateTime": "2022-09-15T06:31:28.688049Z",
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+            "userRiskLevels": [],
+            "signInRiskLevels": [],
+            "clientAppTypes": [
+                "all"
+            ],
+            "servicePrincipalRiskLevels": [],
+            "devices": null,
+            "clientApplications": null,
+            "applications": {
+                "includeApplications": [
+                    "All"
+                ],
+                "excludeApplications": [],
+                "includeUserActions": [],
+                "includeAuthenticationContextClassReferences": []
+            },
+            "users": {
+                "includeUsers": [
+                    "All"
+                ],
+                "excludeUsers": [
+                    "259fcf40-ff7c-4625-9b78-cd11793f161f"
+                ],
+                "includeGroups": [],
+                "excludeGroups": [],
+                "includeRoles": [],
+                "excludeRoles": []
+            },
+            "platforms": {
+                "includePlatforms": [
+                    "all"
+                ],
+                "excludePlatforms": [
+                    "macOS"
+                ]
+            },
+            "locations": {
+                "includeLocations": [
+                    "10a25087-9bf6-479b-a2a1-37e814310c90"
+                ],
+                "excludeLocations": []
+            }
+        },
+        "grantControls": {
+            "operator": "OR",
+            "builtInControls": [
+                "mfa"
+            ],
+            "customAuthenticationFactors": [],
+            "termsOfUse": []
+        }
+    },
+    {
+        "id": "93264357-9b96-4933-afd0-45d88efc9c50",
+        "displayName": "Handle macOs",
+        "createdDateTime": "2022-09-15T06:10:39.6247428Z",
+        "modifiedDateTime": "2022-09-15T06:35:45.8500554Z",
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+            "userRiskLevels": [],
+            "signInRiskLevels": [],
+            "clientAppTypes": [
+                "browser",
+                "mobileAppsAndDesktopClients"
+            ],
+            "servicePrincipalRiskLevels": [],
+            "locations": null,
+            "devices": null,
+            "clientApplications": null,
+            "applications": {
+                "includeApplications": [
+                    "All"
+                ],
+                "excludeApplications": [],
+                "includeUserActions": [],
+                "includeAuthenticationContextClassReferences": []
+            },
+            "users": {
+                "includeUsers": [
+                    "All"
+                ],
+                "excludeUsers": [
+                    "259fcf40-ff7c-4625-9b78-cd11793f161f"
+                ],
+                "includeGroups": [],
+                "excludeGroups": [],
+                "includeRoles": [],
+                "excludeRoles": []
+            },
+            "platforms": {
+                "includePlatforms": [
+                    "macOS"
+                ],
+                "excludePlatforms": [
+                    "linux"
+                ]
+            }
+        },
+        "grantControls": {
+            "operator": "OR",
+            "builtInControls": [
+                "mfa"
+            ],
+            "customAuthenticationFactors": [],
+            "termsOfUse": []
+        }
+    },
+    {
+        "id": "77b0196d-2c3d-4efc-b147-f84e7ac10066",
+        "displayName": "CA005: Require multifactor authentication for guest access",
+        "createdDateTime": "2022-09-15T06:28:48.8020453Z",
+        "modifiedDateTime": "2022-09-15T06:59:48.8188813Z",
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+            "userRiskLevels": [],
+            "signInRiskLevels": [],
+            "clientAppTypes": [
+                "all"
+            ],
+            "servicePrincipalRiskLevels": [],
+            "platforms": null,
+            "locations": null,
+            "devices": null,
+            "clientApplications": null,
+            "applications": {
+                "includeApplications": [
+                    "All"
+                ],
+                "excludeApplications": [
+                    "88cc92be-d474-4d95-a57d-7b3ef701f510"
+                ],
+                "includeUserActions": [],
+                "includeAuthenticationContextClassReferences": []
+            },
+            "users": {
+                "includeUsers": [
+                    "GuestsOrExternalUsers"
+                ],
+                "excludeUsers": [
+                    "259fcf40-ff7c-4625-9b78-cd11793f161f"
+                ],
+                "includeGroups": [],
+                "excludeGroups": [],
+                "includeRoles": [],
+                "excludeRoles": []
+            }
+        },
+        "grantControls": {
+            "operator": "OR",
+            "builtInControls": [
+                "mfa"
+            ],
+            "customAuthenticationFactors": [],
+            "termsOfUse": []
+        }
+    },
+    {
+        "id": "8d8dd620-da93-4be8-a043-fad7c5a54241",
+        "displayName": "Handle Office 365",
+        "createdDateTime": "2022-09-15T06:31:02.2808194Z",
+        "modifiedDateTime": "2022-09-15T06:56:04.4992566Z",
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+            "userRiskLevels": [],
+            "signInRiskLevels": [],
+            "clientAppTypes": [
+                "all"
+            ],
+            "servicePrincipalRiskLevels": [],
+            "platforms": null,
+            "devices": null,
+            "clientApplications": null,
+            "applications": {
+                "includeApplications": [
+                    "Office365"
+                ],
+                "excludeApplications": [],
+                "includeUserActions": [],
+                "includeAuthenticationContextClassReferences": []
+            },
+            "users": {
+                "includeUsers": [
+                    "All"
+                ],
+                "excludeUsers": [],
+                "includeGroups": [],
+                "excludeGroups": [],
+                "includeRoles": [],
+                "excludeRoles": []
+            },
+            "locations": {
+                "includeLocations": [
+                    "All"
+                ],
+                "excludeLocations": [
+                    "10a25087-9bf6-479b-a2a1-37e814310c90"
+                ]
+            }
+        },
+        "grantControls": {
+            "operator": "OR",
+            "builtInControls": [
+                "compliantDevice"
+            ],
+            "customAuthenticationFactors": [],
+            "termsOfUse": []
+        }
+    },
+    {
+        "id": "7bd803c4-31c8-49ae-884f-c92a243331cb",
+        "displayName": "Guests handle O365",
+        "createdDateTime": "2022-09-15T06:34:15.9217336Z",
+        "modifiedDateTime": "2022-09-15T06:56:18.9302211Z",
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+            "userRiskLevels": [],
+            "signInRiskLevels": [],
+            "clientAppTypes": [
+                "mobileAppsAndDesktopClients"
+            ],
+            "servicePrincipalRiskLevels": [],
+            "platforms": null,
+            "locations": null,
+            "devices": null,
+            "clientApplications": null,
+            "applications": {
+                "includeApplications": [
+                    "88cc92be-d474-4d95-a57d-7b3ef701f510"
+                ],
+                "excludeApplications": [],
+                "includeUserActions": [],
+                "includeAuthenticationContextClassReferences": []
+            },
+            "users": {
+                "includeUsers": [
+                    "GuestsOrExternalUsers"
+                ],
+                "excludeUsers": [],
+                "includeGroups": [],
+                "excludeGroups": [],
+                "includeRoles": [],
+                "excludeRoles": []
+            }
+        },
+        "grantControls": {
+            "operator": "OR",
+            "builtInControls": [
+                "mfa"
+            ],
+            "customAuthenticationFactors": [],
+            "termsOfUse": []
+        }
+    }
+]
