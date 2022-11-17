@@ -339,26 +339,29 @@ async function getPolicies() {
             // Normalize matching new guest policies to match existing gap detection logic, when at least following conditions "internalGuest,b2bCollaborationGuest,b2bCollaborationMember" are included (and also not excluded in the same policy)
             
             */
-            p.filter(s => s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes)
+
+            // Handle inclusions
+            p.filter(s => s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes )
                 .filter(s => s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('internalGuest')
                     && s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationGuest')
                     && s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationMember')
-                    && !s.conditions?.users?.excludeGuestsOrExternalUsers
                     && s.conditions.users?.includeGuestsOrExternalUsers.externalTenants["@odata.type"] == '#microsoft.graph.conditionalAccessAllExternalTenants'
                     && s.conditions.users?.includeGuestsOrExternalUsers.externalTenants?.membershipKind == 'all'
                 ).map(s => {
-                    s.conditions.users = {
-                        includeUsers: ["GuestsOrExternalUsers"],
-                        excludeUsers: [],
-                        includeGroups: [],
-                        excludeGroups: [],
-                        includeRoles: [],
-                        excludeRoles: [],
-                        includeGuestsOrExternalUsers: null,
-                        excludeGuestsOrExternalUsers: null,
-                    }
+                    s.conditions.users.includeUsers.push('GuestsOrExternalUsers')
                 })
 
+                  // Handle exclusions
+
+                p.filter(s => s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes )
+                .filter(s => s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('internalGuest')
+                    || s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationGuest')
+                    ||s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationMember')
+                    && s.conditions.users?.includeGuestsOrExternalUsers.externalTenants["@odata.type"] == '#microsoft.graph.conditionalAccessAllExternalTenants'
+                    && s.conditions.users?.includeGuestsOrExternalUsers.externalTenants?.membershipKind == 'all'
+                ).map(s => {
+                    s.conditions.users.excludeUsers.push('GuestsOrExternalUsers')
+                })
         }
 
 
