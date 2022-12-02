@@ -66,6 +66,8 @@ Read [other important notes](#important)
 
 # Release notes
 
+    Release notes: 0.6.9
+    - using --expand=9c06d103-f5b0-4404-bb25-aec4636912cd,47087cd3-64e9-470b-980a-5662f498e016 and expand 10 group members to for separate inspection.
     Release notes: 0.6.8
     - When you update policy with any guest conditions in GUI that policy will be only available from the beta endpoint after the update (during preview). 
     - This update brings normalization for policies that are transfered to beta endpoint due to this behavior. 

@@ -154,7 +154,7 @@ async function main() {
           flGroup.push(`users:${filtered.split(':')[1]}`)
         })
 
-        flGroup.splice(0,argv.expandCount).forEach( r => {
+        flGroup.splice(0,argv.expandCount || 10).forEach( r => {
           expandedNonUniq.push(r)
         })
 
