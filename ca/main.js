@@ -12,6 +12,7 @@ const { getPermutations } = require("./mainPlugins/getPol2");
 const { rpCsv } = require("../createCSVreport");
 const { rpLegacy } = require("../createReportLegacy");
 const { decode } = require("jsonwebtoken");
+const { inMemoryList } = require("./mainPlugins/inMemList");
 
 
 main()
@@ -130,7 +131,6 @@ async function main() {
 
   }
 
-
   [
     'users:GuestsOrExternalUsers',
     'users:All',
@@ -138,31 +138,63 @@ async function main() {
     'Platforms:All'
   ].forEach(u => fullPermutation.push(u))
 
-/* 
-If all platforms should be alt param
-  if (argv.allPlatforms) {
-    fullPermutation.push('Platforms:All')
-  } */
 
   let uniq = []
+  var expandedUniq = []
+
+  try {
+  
+    if (argv.mapping && argv.expand) {
+      let expandedNonUniq = []
+      let inMemoryObjects = inMemoryList()
+
+      argv.expand?.split(',').forEach(grp => {
+        let flGroup = []
+        inMemoryObjects.filter(s => s.split(':')[0] == grp).forEach(filtered => {
+          flGroup.push(`users:${filtered.split(':')[1]}`)
+        })
+
+        flGroup.splice(0,argv.expandCount || 10).forEach( r => {
+          expandedNonUniq.push(r)
+        })
+
+      })
+
+      new Set(expandedNonUniq).forEach(s => {
+        uniq.push(s)
+        expandedUniq.push(s)
+      })
+      console.log()
+      
+    }
+
+  } catch (error) {
+
+    console.log('invalid values for expander', error)
+  }
+
+
   new Set(fullPermutation).forEach(s => uniq.push(s))
+
+
+
 
 
   console.log('inspecting cross-policy mutations')
   // const mesh = permutationList(uniq)
-  let mesh 
-  
+  let mesh
+
   if (argv.aggressive) {
     // keep aggressive available for historical purposes
     mesh = permutationList(uniq)
   } else {
     // non aggressive permutation generation by default
-    mesh= await getPermutations(uniq)
+    mesh = await getPermutations(uniq)
     //console.log(mesh)
   }
- 
 
-  
+
+
 
   const mockForMesh = {
     policy: { displayName: "All (cross-policy)" },
@@ -175,11 +207,17 @@ If all platforms should be alt param
 
   console.log('unique items', uniq.length)
 
+  let mix
 
-
-  const mix = await nTerminatedPolicyConditionsLookupFull([mockForMesh], policies)
+  if (argv.mapping && argv.expand) { 
+     mix = await nTerminatedPolicyConditionsLookupFull([mockForMesh], policies,expandedUniq)
+  } else {
+    mix = await nTerminatedPolicyConditionsLookupFull([mockForMesh], policies)
+  }
 
   
+
+
 
   if (argv.dump) {
     fs.writeFileSync('results.json', JSON.stringify(mix))
@@ -189,24 +227,24 @@ If all platforms should be alt param
 
   if (argv.aggressive) {
 
-  let nq = nonTerm(mix) 
+    let nq = nonTerm(mix)
 
-  rpLegacy(nq, true,true)
+    rpLegacy(nq, true, true)
 
   } else {
 
     /* 
     // add userName and date to reports  
     */
-   let now = new Date()
+    let now = new Date()
     let fileName = `report_day_${now.getDay()}_month_${now.getMonth()}_year_${now.getFullYear()}-tenant_${decode(await getGraphTokenReducedScope())?.tid}`
-    
-    console.log(chalk.green('writing report to', ` ${fileName}.csv` ))
-    console.log(chalk.green('writing report to', ` ${fileName}.md` ))
-  
-    rp(mix, true,undefined,fileName)
 
-    rpCsv(mix,true,undefined,fileName)
+    console.log(chalk.green('writing report to', ` ${fileName}.csv`))
+    console.log(chalk.green('writing report to', ` ${fileName}.md`))
+
+    rp(mix, true, undefined, fileName, expandedUniq)
+
+    rpCsv(mix, true, undefined, fileName,expandedUniq)
 
   }
 

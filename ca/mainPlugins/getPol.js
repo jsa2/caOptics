@@ -11,7 +11,7 @@ const v8 = require('v8')
 
 
 
-async function nTerminatedPolicyConditionsLookupFull(perm, refPol) {
+async function nTerminatedPolicyConditionsLookupFull(perm, refPol,expand) {
     const ret = []
     var count = 0
     for await (let pol of perm) {
@@ -37,6 +37,11 @@ async function nTerminatedPolicyConditionsLookupFull(perm, refPol) {
             let terminations = await iterPols(indiv, innerPol, pol, [], lineage)
             await terminations.forEach(p => ret.push(p))
         }
+    }
+
+    if (!argv.allTerminations && expand) {
+        return ret.filter(s => s?.terminated?.length == 0 || expand.find(u =>u == s?.lookup ))
+
     }
 
     if (argv.allTerminations) {
@@ -293,12 +298,12 @@ async function getPolicies() {
         }
 
         let version
-        if (argv.allowPreviewPolicies) {
-            version = "beta"
+        if (!argv.forceV1) {
+            version = "v1.0"
         }
 
         var opt = {
-            url: `https://${argv.altGraph || "graph.microsoft.com"}/${version || "v1.0"}/identity/conditionalAccess/policies`,
+            url: `https://${argv.altGraph || "graph.microsoft.com"}/${version || "beta"}/identity/conditionalAccess/policies`,
             headers
         }
 
@@ -333,7 +338,7 @@ async function getPolicies() {
             p = require('../mainPlugins/customPolicyFilter')(data)
         }
 
-        if (argv.allowPreviewPolicies) {
+        if (!argv.forceV1) {
             /* 
             // New guest policies
             // Normalize matching new guest policies to match existing gap detection logic, when at least following conditions "internalGuest,b2bCollaborationGuest,b2bCollaborationMember" are included (and also not excluded in the same policy)
@@ -341,7 +346,7 @@ async function getPolicies() {
             */
 
             // Handle inclusions
-            p.filter(s => s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes )
+            p.filter(s => s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes)
                 .filter(s => s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('internalGuest')
                     && s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationGuest')
                     && s.conditions?.users?.includeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationMember')
@@ -351,12 +356,12 @@ async function getPolicies() {
                     s.conditions.users.includeUsers.push('GuestsOrExternalUsers')
                 })
 
-                  // Handle exclusions
+            // Handle exclusions
 
-                p.filter(s => s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes )
+            p.filter(s => s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes)
                 .filter(s => s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('internalGuest')
                     || s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationGuest')
-                    ||s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationMember')
+                    || s.conditions?.users?.excludeGuestsOrExternalUsers?.guestOrExternalUserTypes.match('b2bCollaborationMember')
                     && s.conditions.users?.excludeGuestsOrExternalUsers.externalTenants["@odata.type"] == '#microsoft.graph.conditionalAccessAllExternalTenants'
                     && s.conditions.users?.excludeGuestsOrExternalUsers.externalTenants?.membershipKind == 'all'
                 ).map(s => {
