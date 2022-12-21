@@ -6,7 +6,7 @@ const { argv } = require('yargs')
 const beautify = require('js-beautify').js
 
 
-function rpCsv (perms,cross, unparsed,filename) {
+function rpCsv (perms,cross, unparsed,filename,expandFlags) {
 
   try {
     unlinkSync(`${filename}.csv`)
@@ -66,7 +66,21 @@ console.log('')
         let id = details.split('users:')[1].split(' ->')[0]
         let resolved = objectIdMap?.find( s=>  s?.id == id ) 
         if (resolved) {
-          id = id.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName}`)
+
+          if (argv.expand && expandFlags?.length > 0) {
+
+            let flagged = expandFlags.find( s => s?.split('users:')[1] == id)  
+
+            if (flagged) {
+              id = id.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName} -flagged via expand option`)
+            } else {
+              id = id.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName}`)
+            }
+          } else {
+            id = id.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName}`)
+          }
+
+          
        
           csvBody+=`"${id}",`
         } else {  csvBody+=`"${id}",`}

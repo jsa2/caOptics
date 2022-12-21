@@ -6,7 +6,7 @@ const { argv } = require('yargs')
 const beautify = require('js-beautify').js
 
 
-function rp (perms,cross, unparsed, fileName) {
+function rp (perms,cross, unparsed, fileName,expandFlags) {
 
     const namedLocations = require('./namedLocations.json')
     var objectIdMap
@@ -71,7 +71,19 @@ function rp (perms,cross, unparsed, fileName) {
           if (!resolved) {
       
           } else {
-            details = details.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName}`)
+           
+            if (argv.expand && expandFlags?.length > 0) {
+              let flagged = expandFlags.find( s => s?.split('users:')[1] == id)       
+              if (flagged) {
+                details = details.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName} - flagged via expand option`)
+              } else {
+                details = details.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName}`)
+              }
+
+            } else {
+              details = details.replace(id,`${resolved['@odata.type'].split('#microsoft.graph.')[1]}-${resolved?.displayName}`)
+            }
+
           }
         }
         

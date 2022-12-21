@@ -65,7 +65,7 @@ return responseCollector
 
 var count = 0
 
-async function groupHandler (groups,) {
+async function groupHandler (groups) {
 
     let token = await getGraphTokenReducedScope()
     

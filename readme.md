@@ -39,23 +39,28 @@ If you are new to Conditional Access we recommend that you review the following 
 
 ## Notes for early testers
 
+---
+One-liner to run this tool: (if this is the only part you are planning to read, and have completed installation)
+
+``node ./ca/main.js --mapping  --skipObjectId=259fcf40-ff7c-4625-9b78-cd11793f161f --clearPolicyCache --clearTokenCache --clearMappingCache --mapping`` 
+
+---
+
+
 After completing the pre-requisites and reading this readme file, consider following:
-
->⚠ Policies that are only available from /beta/ endpoint are automatically excluded from scope. This includes any new policy with guest settings at the time of writing
-
 
 1. reportOnly policies are not considered terminating:
  Read: [``scope``](#scope)
 
-2. run each scan with [``--clearPolicyCache``](#parameters)
-3. run each scan with [``--clearMappingCache``](#parameters) if you do changes in the groups / users related to policies
+1. run each scan with [``--clearPolicyCache``](#parameters)
+2. run each scan with [``--clearMappingCache``](#parameters) if you do changes in the groups / users related to policies
 
-4. only policies targeting users and apps are in scope (this is the most common scope, but means for example, that security registration policy is not evaluated)
+3. only policies targeting users and apps are in scope (this is the most common scope, but means for example, that security registration policy is not evaluated)
  Read: [``scope``](#scope)
 
-4. Start with test environment so you get some experience and can set expectations about the tool mechanics
-5. if you have known group or users that are excluded from policies define with ``--skipObjectIds`` objects to be excluded from the scan unless you are looking to confirm the exclusions
-6. If you are running scans in multiple environments ensure: logins and caches are removed before running new scans
+1. Start with test environment so you get some experience and can set expectations about the tool mechanics
+2. if you have known group or users that are excluded from policies define with ``--skipObjectIds`` objects to be excluded from the scan unless you are looking to confirm the exclusions
+3. If you are running scans in multiple environments ensure: logins and caches are removed before running new scans
   
    Read:[parameters](#parameters)
     - if you have AZ CLI installed, then clear AZ CLI cache before proceeding with ``az account clear`` and new perform new login to the environment you are planning to scan with ``az login`` 
@@ -66,6 +71,10 @@ Read [other important notes](#important)
 
 # Release notes
 
+    Release notes: 0.7
+    - Uses beta endpoint now by default, --expand option now expands the results to report regardless of the use of --allTerminations
+    Release notes: 0.6.9
+    - using --expand=9c06d103-f5b0-4404-bb25-aec4636912cd,47087cd3-64e9-470b-980a-5662f498e016 and expand 10 group members to for separate inspection.
     Release notes: 0.6.8
     - When you update policy with any guest conditions in GUI that policy will be only available from the beta endpoint after the update (during preview). 
     - This update brings normalization for policies that are transfered to beta endpoint due to this behavior. 
@@ -404,8 +413,7 @@ Param| Description
 ``altLogin `` | Allows defining alternative login endpoint FQDN <br> eg. ``--altLogin=login.microsoft.com.alt``
 ``altGraph `` | Allows defining alternative graph endpoint FQDN <br> eg. ``--altGraph=graph.microsoft.com.alt`` 
 ``customPolicyFilter `` | Allow use of custom filtering for policies (this only recommended, when the policies do not adhere to expected schema) <br> eg. ``--customPolicyFilter`` <br> You can modify the filter by selecting [``customPolicyFilter.js``](ca/mainPlugins/customPolicyFilter.js) 
-``--allowPreviewPolicies`` | Allows use of beta endpoint for policies  <br> eg.``--allowPreviewPolicies``
-
+``expand `` | Allows defining an group to be expanded in results. By default the group is expanded for 10 first items. Amount of expanded items can be increased by using in conjuction the option ``--expandCount=30``<br> eg. ``--expand=9c06d103-f5b0-4404-bb25-aec4636912cd,47087cd3-64e9-470b-980a-5662f498e016`` <br> Note: Use of this option requires that mapping cache is cleared ``--clearMappingCache`` 
 
 ### supplying parameters from launch.json (debugging in VSCode)?
 
