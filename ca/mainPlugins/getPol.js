@@ -298,12 +298,12 @@ async function getPolicies() {
         }
 
         let version
-        if (!argv.forceV1) {
+        if (argv.forceV1) {
             version = "v1.0"
         }
 
         var opt = {
-            url: `https://${argv.altGraph || "graph.microsoft.com"}/${version || "beta"}/identity/conditionalAccess/policies`,
+            url: `https://${argv.altGraph || "graph.microsoft.com"}/${version ||"beta"}/identity/conditionalAccess/policies`,
             headers
         }
 
