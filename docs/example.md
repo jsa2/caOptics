@@ -72,21 +72,3 @@ All|   2| users:Global Sales  ``✅ 'Sales Policy' inlcudes all 'GlobalSales'``
 **Scenario 3**
 
 What if user is included in main exclusion group, but then handled via other group in policies that "close the gap"? In these situations when you want to explicitly show how the user/users might be terminated in other policies, you can use the [``--expand``](../readme.md#parameters) option.
-
-Example
-
-    aldo.diaz@m.dewi.red
-
-        part of Marketing
-        part of Sales
-        -> Sales is part of group GlobalSales
-
-        
-        Baseline policy
-            excludes: 
-                Marketing group
-                Aldo Diaz User
-        
-        Sales Policy
-            includes:
-                GlobalSales group
