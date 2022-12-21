@@ -42,7 +42,7 @@ If you are new to Conditional Access we recommend that you review the following 
 ---
 One-liner to run this tool: (if this is the only part you are planning to read, and have completed installation)
 
-``node ./ca/main.js --mapping  --skipObjectId=259fcf40-ff7c-4625-9b78-cd11793f161f --clearPolicyCache --clearTokenCache --clearMappingCache --mapping`` 
+``node ./ca/main.js --mapping  --skipObjectId=259fcf40-ff7c-4625-9b78-cd11793f161f --clearPolicyCache --clearTokenCache --clearMappingCache `` 
 
 ---
 
