@@ -15,6 +15,7 @@ rollback.js
 # exclude from JSON and MD flag
 !_launch.json
 !package.json
+!package-lock.json
 !/providers/**
 !/demodata/**
 !/docs/**
