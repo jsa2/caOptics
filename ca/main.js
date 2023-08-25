@@ -174,10 +174,14 @@ async function main() {
   }
 
 
+
   new Set(fullPermutation).forEach(s => uniq.push(s))
 
 
-
+ if (argv?.removeCondition) {
+  uniq = uniq.filter(s => s !== argv.removeCondition)
+  console.log(uniq)
+ }
 
 
   console.log('inspecting cross-policy mutations')
