@@ -71,6 +71,8 @@ Read [other important notes](#important)
 
 # Release notes
 
+    Release notes: 0.7.1
+    - Updated depedencies and report text outputs 
     Release notes: 0.7
     - Uses beta endpoint now by default, --expand option now expands the results to report regardless of the use of --allTerminations
     Release notes: 0.6.9

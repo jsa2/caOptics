@@ -250,7 +250,7 @@ async function main() {
 
 
 
-  console.log(chalk.green('review crosstable.md for results'))
+  console.log(chalk.green('review md and csv reports for results'))
 
   return;
 

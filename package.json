@@ -1,5 +1,5 @@
 {
-  "name": "kv.md",
+  "name": "caoptics",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
@@ -10,11 +10,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "axios": "^0.24.0",
-    "chalk": "^4.1.2",
-    "js-beautify": "^1.14.2",
-    "jsonwebtoken": "^9.0.0",
-    "uuid": "^8.3.2",
-    "yargs": "^17.5.1"
+    "axios": "^1.6.7",
+    "chalk": "^4",
+    "js-beautify": "^1.14.11",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.1",
+    "yargs": "^17.7.2"
   }
 }
