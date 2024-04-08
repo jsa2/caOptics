@@ -13,6 +13,7 @@ const { rpCsv } = require("../createCSVreport");
 const { rpLegacy } = require("../createReportLegacy");
 const { decode } = require("jsonwebtoken");
 const { inMemoryList } = require("./mainPlugins/inMemList");
+const { extraFilter } = require("./mainPlugins/extraFiltering");
 
 
 main()
@@ -92,6 +93,17 @@ async function main() {
     console.log(policies)
   }
 
+    /* 
+  <Inline code update start
+  Sometimes, policy could still have grant conditions (which this tool is looking for), but none of the grant conditions are actually really closing the gap (such as read TOS etc) - Or additionally the allow such non closing condition with OR clause eg. is MFA or TOS read 
+  this code update is done inline, not to intervene with the original function and can be rolled back by just removing this inline filtering if needed to revert back
+  */
+
+  policies = await extraFilter(policies)
+
+  /* 
+  Inline code update end>
+  */
 
   if (argv.mapping) {
     await userMap(policies)
