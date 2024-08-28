@@ -1,4 +1,14 @@
 
+#
+
+---
+
+Project archived due to focusing my community efforts to other areas (PoCs, other tools and demos/presentation), set to read-only. 
+
+---
+
+#
+
 - [CA Optics - Azure AD Conditional Access Gap Analyzer](#ca-optics---azure-ad-conditional-access-gap-analyzer)
   - [What is Conditional Access?](#what-is-conditional-access)
   - [Notes for early testers](#notes-for-early-testers)
