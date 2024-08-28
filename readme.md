@@ -2,7 +2,7 @@
 # Note
 
 
-**Project archived due to refocusing my community efforts to other areas (PoCs, other tools and demos/presentation), project is set to read-only.**
+**Project archived due to shifting development priorities and refocusing my community efforts to other areas (PoCs, other tools and demos/presentation), project is set to read-only.**
 
 
 ---
